@@ -1,0 +1,119 @@
+.division48134 {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(245, 248, 255);
+}
+.division30813 {
+  height: 100%;
+  width: 50%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.division16439 {
+  height: auto;
+  width: 90%;
+  position: relative;
+  box-sizing: border-box;
+}
+.text69986 {
+  text-transform: uppercase;
+}
+.button30414 {
+  align-items: center;
+  width: auto;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  border-width: 0px;
+  background-color: rgb(93, 135, 227);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+}
+.division52505 {
+  height: 30%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.text48496 {
+  text-transform: uppercase;
+}
+.division29206 {
+  height: 70%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+.division25188 {
+  height: 100%;
+  width: 50%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#main-container {
+  width: 1234.8px;
+  height: 694.575px;
+  overflow-y: scroll;
+}
+.page1desc {
+  font-weight: lighter;
+  letter-spacing: 9px;
+}
+.paragraph73592 {
+  width: 60%;
+}
+.image58644 {
+  width: 80%;
+}
+.secondheadingdesc {
+  letter-spacing: 13px;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  text-decoration: underline;
+  margin-top: 0px;
+}
+.page2desc {
+  font-weight: lighter;
+  letter-spacing: 9px;
+  margin: 0px;
+}
+.page3desc {
+  letter-spacing: 4px;
+  font-size: 1rem;
+  font-weight: lighter;
+  text-decoration: none;
+  margin-top: 0px;
+}
+.thirdnavcont {
+  display: block;
+  padding: 3rem;
+  height: auto !important;
+}
+.image55401 {
+  width: 100%;
+}
+.signup {
+  padding: 15px 40px;
+  border-radius: 34px;
+  margin-bottom: 0px;
+  position: absolute;
+  top: 15%;
+  left: 45%;
+}

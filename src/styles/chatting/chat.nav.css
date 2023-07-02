@@ -1,0 +1,43 @@
+.nav-item {
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.image34701 {
+  width: 35px;
+}
+.sidenavbar {
+  height: 100%;
+  width: 5%;
+  min-width: 60px;
+  min-width: 70px;
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(64, 64, 64);
+}
+.navtop-items {
+  height: 50%;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.profileontrol {
+  height: 55px;
+  width: 55px;
+  box-sizing: border-box;
+  background-size: cover;
+  margin-bottom: 15px;
+  border-radius: 40px;
+  background-image: url("https://imgv3.fotor.com/images/gallery/AI-3D-Female-Profile-Picture.jpg");
+  border: 3px solid rgb(255, 255, 255);
+}

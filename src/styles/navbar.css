@@ -1,0 +1,43 @@
+.top-navbar {
+  height: 60px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(101, 144, 153, 0.29);
+}
+#id1687191651461 {
+  height: 100%;
+  width: auto;
+  position: relative;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+}
+#id1687191718101 {
+  height: 100%;
+  width: auto;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.signin-button {
+  height: 35px;
+  width: 100px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 23px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: rgb(90, 110, 224);
+}
