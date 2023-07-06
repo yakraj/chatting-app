@@ -6,6 +6,12 @@
   justify-content: center;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.nav-item:hover {
+  box-shadow: 0 0 10px #fff, 0 0 15px #fff, inset 0 0 10px #fff,
+    inset 0 0 5px #fff, inset 0 0 15px #fff, 0 0 20px #fff;
 }
 .image34701 {
   width: 35px;
@@ -23,7 +29,7 @@
   background-color: rgb(64, 64, 64);
 }
 .navtop-items {
-  height: 50%;
+  height: 40%;
   width: 100%;
   box-sizing: border-box;
   flex-direction: column;
