@@ -1,0 +1,108 @@
+.text50755 {
+  text-transform: capitalize;
+}
+.address-container-info {
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paragraph87029 {
+  font-weight: 400;
+  text-transform: capitalize;
+  color: rgb(41, 67, 214);
+  margin: 0px;
+}
+.media-image-box {
+  height: 110px;
+  width: 110px;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 0px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+.blurry-container {
+  padding-top: 100px;
+  height: 100%;
+  transition-duration: 0.3s;
+  width: 45%;
+  overflow: hidden;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 9;
+  left: 0px;
+  top: 0px;
+}
+
+.absolute-nav {
+  position: absolute;
+  top: 0;
+  justify-content: flex-end;
+  z-index: 9;
+}
+.division81937 {
+  height: auto;
+  width: 90%;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: rgb(224, 224, 224);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 30px;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+.profile-avatar {
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  background-size: cover;
+  border-radius: 50px;
+  background-image: url("https://media.licdn.com/dms/image/D4D03AQH2a2Z2ZLqdTQ/profile-displayphoto-shrink_800_800/0/1686267455339?e=2147483647&v=beta&t=6nbDjfqLbgvmMoV2QoGsQ_-0yB7j5_BgWC88U99d1KU");
+}
+.image89335 {
+  margin-right: 10px;
+}
+.strong82192 {
+  margin-left: 9px;
+  text-transform: capitalize;
+}
+.media-container {
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px;
+}
+.division56389 {
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+}
+.media-text {
+  margin: 0px 0px 0px 10px;
+  text-decoration: none;
+  width: 100%;
+  height: auto;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-bottom: 1px solid grey;
+}
+.media-images-container {
+  height: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: overlay;
+}
