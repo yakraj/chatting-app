@@ -6,10 +6,21 @@
   margin: 0px;
   text-transform: capitalize;
 }
+
+.image16277:hover {
+  padding: 5px;
+  /* border: 1px solid grey; */
+  border-radius: 50%;
+  /* box-sizing: border-box; */
+  box-shadow: 0 0 5px grey, 0 0 10px grey, 0 0 15px grey;
+}
 .image16277 {
-  width: 25px;
+  width: 36px;
+  cursor: pointer;
+  transition-duration: 0.3s;
   margin-left: 10px;
   margin-right: 8px;
+  box-sizing: border-box;
 }
 .division24344 {
   box-sizing: border-box;
@@ -72,7 +83,6 @@
   justify-content: space-between;
   display: flex;
   box-shadow: rgb(0, 0, 0) 0px 1px 5px;
-  overflow: hidden;
 }
 .chat-nav-left {
   height: 100%;
@@ -105,16 +115,18 @@
   height: 100%;
   width: 0px;
   box-sizing: border-box;
+  transition-duration: 0.3s;
   justify-content: center;
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin-right: -39px;
+  margin-right: -45px;
 }
 .searchinput20267 {
   border-width: 1px;
   background-color: rgba(136, 168, 131, 0);
   height: 35px;
+  width: 100%;
   border-radius: 5px;
   border-color: rgb(168, 168, 168);
   color: rgb(97, 97, 97);
@@ -122,6 +134,7 @@
 .division36662 {
   height: 92%;
   width: 100%;
+  position: relative;
   box-sizing: border-box;
   padding: 10px 0px 0px;
   background-color: rgba(199, 199, 199, 0.3);
@@ -195,4 +208,41 @@
   padding-top: 5px;
   justify-content: center;
   align-items: center;
+}
+
+.division29438 {
+  cursor: pointer;
+  height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid grey;
+}
+.image56324 {
+  width: 15px;
+}
+.paragraph34114 {
+  margin: 0px;
+  padding-left: 5px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.division90631 {
+  position: absolute;
+  right: 0;
+  display: none;
+  top: 80%;
+  height: auto;
+  width: 120px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: rgb(212, 212, 212);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.show-pops:hover .division90631 {
+  display: block;
 }

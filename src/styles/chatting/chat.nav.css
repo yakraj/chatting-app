@@ -37,10 +37,16 @@
   align-items: center;
   justify-content: space-evenly;
 }
+
+.profileontrol:hover {
+  box-shadow: 0 0 15px #fff;
+}
 .profileontrol {
+  transition-duration: 0.3s;
   height: 55px;
   width: 55px;
   box-sizing: border-box;
+  cursor: pointer;
   background-size: cover;
   margin-bottom: 15px;
   border-radius: 40px;

@@ -103,17 +103,18 @@
   justify-content: center;
   display: flex;
   align-items: center;
-  margin-top: 2px;
 }
 .personalize-container {
   height: 100%;
   width: 20%;
   min-width: 260px;
+  max-width: 280px;
   box-sizing: border-box;
   flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  overflow-x: hidden;
 }
 .cover-image {
   height: 15%;
@@ -127,7 +128,11 @@
 .avatar {
   height: 100px;
   width: 100px;
-  box-sizing: border-box;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-size: cover;
   border-radius: 50%;
   margin-top: -50px;
   background-image: url("https://th.bing.com/th?id=OIP.1oe_xOxMHjY_gopObkoYWgHaEo&w=316&h=197&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2");
@@ -177,4 +182,486 @@
   margin-top: 50px;
   padding-bottom: 27px;
   border-top: 1px solid grey;
+}
+.search-result-container {
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.division34074 {
+  backdrop-filter: blur(20px);
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 5px;
+  position: sticky;
+}
+.text20358 {
+  margin: 0px;
+  font-size: 0.9rem;
+  padding-left: 5px;
+  color: rgb(150, 150, 150);
+  font-weight: 600;
+}
+.division44297 {
+  width: 80%;
+  box-sizing: border-box;
+  border-radius: 4%;
+  overflow: hidden;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(245, 245, 245);
+  padding-bottom: 10px;
+  box-shadow: 0 0 10px grey;
+}
+.division53176 {
+  background-size: cover;
+  height: 40%;
+  width: 100%;
+  box-sizing: border-box;
+  background-image: url("https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg");
+}
+.division69090 {
+  height: 60px;
+  width: 60px;
+  border: 3px solid #fff;
+  box-sizing: border-box;
+  border-radius: 50%;
+  margin-top: -30px;
+  background-size: cover;
+  background-image: url("https://cdn.pixabay.com/photo/2019/01/30/18/23/cherry-blossom-3965066_640.jpg");
+}
+.text80594 {
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: capitalize;
+  margin: 0px;
+  color: rgb(168, 168, 168);
+}
+.archive-address {
+  height: 19.5px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image72541 {
+  width: 15px;
+}
+.paragraph88375 {
+  margin: 0px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+  color: rgb(138, 138, 138);
+}
+.input72282 {
+  width: 90%;
+  border-radius: 6px;
+  border: 1px solid grey;
+  height: 20px;
+}
+.button20350 {
+  cursor: pointer;
+  text-transform: capitalize;
+  margin-top: 5px;
+  border-width: 0px;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  transition-duration: 0.3s;
+}
+.button20350:hover {
+  background-color: rgb(47, 52, 73) !important;
+  color: #fff;
+  box-shadow: 0 0 10px #000;
+}
+.division51510 {
+  height: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-around;
+  display: flex;
+  margin-top: 10px;
+}
+.last-send-req-message {
+  height: auto;
+  width: 90%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.image67949 {
+  width: 10px;
+}
+.paragraph42157 {
+  font-size: 0.6rem;
+  margin: 0px;
+  font-weight: 600;
+  color: rgb(158, 158, 158);
+  line-height: 8px;
+}
+.requested-date-button {
+  text-transform: capitalize;
+  margin-top: 5px;
+  border-radius: 5px;
+  border-width: 0px;
+  padding: 4px 5px;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  width: auto;
+  background-color: rgb(82, 161, 129);
+  color: rgb(255, 255, 255);
+}
+
+.division15470 {
+  height: 34px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: rgb(145, 145, 145);
+  position: sticky;
+  top: 0px;
+  background-color: rgb(255, 255, 255);
+}
+.heading-text {
+  margin: 0px;
+  font-family: Helvetica;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.pending-button {
+  margin: 0px;
+  cursor: pointer;
+  font-family: Helvetica;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  padding: 4px;
+  background-color: rgb(6, 140, 37);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+}
+.search-container {
+  height: 42px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  position: relative;
+  right: 0%;
+}
+.input27068 {
+  height: 35px;
+  width: 90%;
+  border: 0px solid grey;
+  background-color: rgb(217, 217, 217);
+  color: rgb(255, 255, 255);
+  padding-left: 9px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.image35932 {
+  position: absolute;
+  right: 7%;
+}
+.request-send-button {
+  text-transform: capitalize;
+  margin-top: 5px;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 4px;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  width: 80%;
+  background-color: rgb(113, 145, 235);
+  color: rgb(255, 255, 255);
+}
+.requests-container {
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.paragraph48560 {
+  text-transform: capitalize;
+  color: rgb(143, 143, 143);
+  font-weight: 600;
+}
+.single-message-archive {
+  height: auto;
+  width: 90%;
+  box-sizing: border-box;
+  border: 1px solid rgb(255, 255, 255);
+  align-items: center;
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.division45412 {
+  height: 50px;
+  background-size: cover;
+  width: 50px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-image: url("https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg");
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+}
+.division74473 {
+  height: 16.875px;
+  width: 16.875px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: rgb(0, 191, 115);
+  justify-content: flex-end;
+  display: flex;
+}
+.division52428 {
+  height: 39.375px;
+  width: auto;
+  box-sizing: border-box;
+  margin-left: 7px;
+  padding-left: 0px;
+}
+.message-archive-title {
+  text-transform: capitalize;
+  color: rgb(143, 143, 143);
+  font-weight: 600;
+  margin: 0%;
+}
+.message-archive-lastmsg {
+  text-transform: none;
+  color: rgb(143, 143, 143);
+  font-weight: lighter;
+  margin: 0%;
+  font-size: 0.8rem;
+}
+
+.division15470 {
+  height: 34px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: rgb(145, 145, 145);
+  position: sticky;
+  top: 0px;
+  background-color: rgb(255, 255, 255);
+  margin-top: 5px;
+}
+.heading-text {
+  margin: 0px;
+  font-family: Helvetica;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.pending-button {
+  margin: 0px;
+  font-family: Helvetica;
+  font-weight: lighter;
+  text-transform: capitalize;
+  font-size: 1rem;
+  padding: 4px 8px;
+  background-color: rgb(6, 140, 37);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+}
+.search-container {
+  height: 42px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  position: relative;
+  right: 0%;
+}
+.input27068 {
+  height: 35px;
+  width: 90%;
+  border: 0px solid grey;
+  background-color: rgb(217, 217, 217);
+  color: grey;
+  padding-left: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.image35932 {
+  position: absolute;
+  right: 7%;
+}
+.messages-tab-nav {
+  height: 30px;
+  width: 90%;
+  box-sizing: border-box;
+  border-width: 2px;
+  border-bottom-style: solid;
+  border-color: rgb(6, 140, 37);
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.title-about-person {
+  margin: 0px;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+.single-dot {
+  height: 5px;
+  width: 5px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.division35651 {
+  height: 34.375px;
+  width: 90%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.image47802 {
+  width: 20px;
+}
+.paragraph52603 {
+  justify-content: flex-start;
+  display: flex;
+  text-transform: capitalize;
+  margin-left: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgb(143, 143, 143);
+  letter-spacing: 1.2px;
+}
+
+.division67935 {
+  height: 20%;
+  width: 100%;
+  box-sizing: border-box;
+  background-size: cover;
+  background-image: url("https://thumbs.dreamstime.com/b/landscape-nature-mountan-alps-rainbow-76824355.jpg");
+}
+.division88230 {
+  height: 35.625px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+}
+.three-dot-container {
+  height: 80%;
+  width: 15px;
+  position: relative;
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+.division63858 {
+  height: 100px;
+  background-size: cover;
+
+  width: 100px;
+  box-sizing: border-box;
+  border-radius: 100px;
+  margin-top: -50px;
+  border: 5px solid rgb(255, 255, 255);
+  background-image: url("https://funkylife.in/wp-content/uploads/2023/02/cute-girl-pic-2-1024x1024.jpg");
+}
+.division81716 {
+  height: 70px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: grey;
+}
+.division73450 {
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.popup-container {
+  position: absolute;
+  top: 90%;
+  display: none;
+  right: 0px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+}
+.singlePopOption:hover {
+  background: rgba(136, 136, 136, 0.219);
+  color: #000;
+}
+.three-dot-container:hover .popup-container {
+  display: block;
+}
+.singlePopOption {
+  display: flex;
+  margin-top: 5px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  color: grey;
+  justify-content: start;
+  align-items: center;
+}
+.singlePopOption img {
+  opacity: 0.6;
+}
+.singlePopOption p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 5px;
+  text-transform: capitalize;
 }

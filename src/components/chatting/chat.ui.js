@@ -4,7 +4,9 @@ import { InfoUser } from "./info.data";
 
 export const ChatUI = () => {
   const [infoOn, setinfoOn] = useState(false);
-
+  const [searchOpend, onSearchOpend] = useState(false);
+  const [popTdot, onpopTdot] = useState(false);
+  const [deletedot, ondeletedot] = useState(false);
   return (
     <>
       <div className="division54868">
@@ -51,23 +53,66 @@ export const ChatUI = () => {
             </div>
           </div>
           <div className="division77724 chat-nav-right">
-            <div className="division86115 chatnav-search">
+            <div
+              style={{ width: searchOpend ? "300px" : "0px" }}
+              className="division86115 chatnav-search"
+            >
               <input
                 className="searchinput20267"
-                type="search"
+                type="text"
                 placeholder="Your Text"
               />
             </div>
             <img
+              onClick={() => onSearchOpend(!searchOpend)}
               src={require("../../assects/search.png")}
               className="image16277"
               alt="custom"
             />
-            <img
-              src={require("../../assects/delete.png")}
-              className="image16277"
-              alt="custom"
-            />
+            <div className="relative show-pops">
+              <img
+                onMouseEnter={() => ondeletedot(true)}
+                onMouseLeave={() => ondeletedot(false)}
+                src={require("../../assects/delete.png")}
+                className="image16277"
+                alt="custom"
+              />
+              <div style={{ width: "200px" }} className="division90631">
+                <div
+                  className="division29438"
+                  style={{ paddingLeft: "10px", paddingBottom: "3px" }}
+                >
+                  <img
+                    src={require("../../assects/trash.png")}
+                    className="image56324"
+                    alt="custom"
+                  />
+                  <p
+                    className="paragraph34114"
+                    style={{ color: "rgb(255, 0, 4)" }}
+                  >
+                    Delete for me
+                  </p>
+                </div>
+                <div
+                  className="division29438"
+                  style={{ paddingLeft: "10px", paddingBottom: "3px" }}
+                >
+                  <img
+                    src={require("../../assects/trash.png")}
+                    className="image56324"
+                    alt="custom"
+                  />
+                  <p
+                    className="paragraph34114"
+                    style={{ color: "rgb(255, 0, 4)" }}
+                  >
+                    Delete for Everyone
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <img
               onClick={() => {
                 setinfoOn(!infoOn);
@@ -76,11 +121,65 @@ export const ChatUI = () => {
               className="image16277"
               alt="custom"
             />
-            <img
-              src={require("../../assects/three-dots.png")}
-              className="image16277"
-              alt="custom"
-            />
+            <div className="relative show-pops">
+              <img
+                onMouseEnter={() => onpopTdot(true)}
+                onMouseLeave={() => onpopTdot(false)}
+                src={require("../../assects/three-dots.png")}
+                className="image16277"
+                alt="custom"
+              />
+              <div className="division90631">
+                <div
+                  className="division29438"
+                  style={{ paddingLeft: "10px", paddingBottom: "3px" }}
+                >
+                  <img
+                    src={require("../../assects/block.png")}
+                    className="image56324"
+                    alt="custom"
+                  />
+                  <p
+                    className="paragraph34114"
+                    style={{ color: "rgb(255, 0, 4)" }}
+                  >
+                    block
+                  </p>
+                </div>
+                <div
+                  className="division29438"
+                  style={{ padding: "0px 0px 3px 10px", marginTop: "5px" }}
+                >
+                  <img
+                    src={require("../../assects/trash.png")}
+                    className="image56324"
+                    alt="custom"
+                  />
+                  <p
+                    className="paragraph34114"
+                    style={{ color: "rgb(255, 0, 4)" }}
+                  >
+                    delete
+                  </p>
+                </div>
+                <div
+                  className="division29438"
+                  style={{ padding: "0px 0px 3px 10px", marginTop: "5px" }}
+                >
+                  <img
+                    src={require("../../assects/favorite.svg").default}
+                    className="image56324"
+                    alt="custom"
+                  />
+                  <p
+                    className="paragraph34114"
+                    style={{ color: "rgb(54, 133, 28)" }}
+                  >
+                    favourite
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="division36662">

@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/navbar.css";
+import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
+  const navigation = useNavigate();
   return (
     <nav className="top-navbar">
       <div id="id1687191651461">
@@ -77,7 +79,12 @@ export const Navbar = () => {
         >
           carrear
         </p>
-        <div className="signin-button">
+        <div
+          onClick={() => {
+            navigation("/chatting");
+          }}
+          className="signin-button"
+        >
           <p
             style={{
               fontWeight: 600,
