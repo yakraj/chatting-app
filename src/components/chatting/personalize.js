@@ -9,7 +9,7 @@ export const Personalize = ({ activePer, setActivePer }) => {
   const renderComponent = () => {
     switch (activePer) {
       case "chats":
-        return <ChatsPer />;
+        return <ChatsPer setActivePer={setActivePer} />;
       case "setting":
         return <SettingsPer />;
       case "community":

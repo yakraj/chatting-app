@@ -1,11 +1,13 @@
 import React from "react";
 
-export const ChatsPer = () => {
+export const ChatsPer = ({ setActivePer }) => {
   return (
     <>
       <div class="division15470">
         <p class="heading-text">Peoples</p>
-        <p class="pending-button">+</p>
+        <p onClick={() => setActivePer("community")} class="pending-button">
+          +
+        </p>
       </div>
       <div class="search-container">
         <input type="text" class="input27068" placeholder="Your Text" />

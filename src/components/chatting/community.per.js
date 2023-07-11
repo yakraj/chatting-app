@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const CommunityPer = () => {
+  const [showPending, setShowPending] = useState(false);
   const PendingCard = () => {
     return (
       <div className="division44297" style={{ height: "210px", margin: "5px" }}>
@@ -123,7 +124,15 @@ export const CommunityPer = () => {
     <>
       <div className="division15470">
         <p className="heading-text">Peoples</p>
-        <p className="pending-button">Pending...</p>
+        <p
+          style={{ background: showPending ? "red" : "green" }}
+          onClick={() => {
+            setShowPending(!showPending);
+          }}
+          className="pending-button"
+        >
+          {showPending ? "hide" : "pending..."}
+        </p>
       </div>
       <div className="search-container">
         <input
@@ -138,21 +147,7 @@ export const CommunityPer = () => {
           alt="custom"
         />
       </div>
-      <div className="search-result-container">
-        <div className="division34074" style={{ top: "35px" }}>
-          <h1 className="text20358">My Pending Requests</h1>
-          <hr
-            style={{
-              width: "100%",
-              backgroundColor: "rgb(140, 140, 140)",
-              margin: "0px",
-            }}
-          />
-        </div>
-        <PendingCard />
-        <PendingCard />
-        <PendingCard />
-      </div>
+
       <div className="search-result-container">
         <div className="division34074" style={{ top: "35px" }}>
           <h1 className="text20358">Results</h1>
@@ -166,6 +161,27 @@ export const CommunityPer = () => {
         </div>
         <SearchResultCard />
         <SearchResultCard />
+      </div>
+      <div
+        style={{
+          height: showPending ? "auto" : "0px",
+          overflow: showPending ? "unset" : "hidden",
+        }}
+        className="search-result-container"
+      >
+        <div className="division34074" style={{ top: "35px" }}>
+          <h1 className="text20358">My Pending Requests</h1>
+          <hr
+            style={{
+              width: "100%",
+              backgroundColor: "rgb(140, 140, 140)",
+              margin: "0px",
+            }}
+          />
+        </div>
+        <PendingCard />
+        <PendingCard />
+        <PendingCard />
       </div>
       <div className="requests-container">
         <div className="division34074" style={{ top: "35px" }}>

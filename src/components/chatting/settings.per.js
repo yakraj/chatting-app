@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const SettingsPer = () => {
+  // switches state
+
+  const [lastSeenSw, setLastSeenSw] = useState(false);
+  const [TimeSw, setTimeSw] = useState(true);
+  const [NotificationSw, setNotificationSw] = useState(true);
+
   return (
     <>
       <div className="cover-image">
@@ -143,10 +149,22 @@ export const SettingsPer = () => {
                 last seen
               </p>
             </div>
-            <div className="switch-button" style={{ border: "2px solid grey" }}>
+            <div
+              className="switch-button"
+              onClick={() => setLastSeenSw(!lastSeenSw)}
+              style={{
+                justifyContent: lastSeenSw ? "flex-end" : "flex-start",
+                border: lastSeenSw
+                  ? "2px solid rgb(0, 133, 126)"
+                  : "2px solid grey",
+                background: lastSeenSw ? "rgb(0, 133, 126)" : "transparent",
+              }}
+            >
               <div
                 className="switch-inner"
-                style={{ backgroundColor: "rgb(130, 130, 130)" }}
+                style={{
+                  backgroundColor: lastSeenSw ? "#fff" : "rgb(130, 130, 130)",
+                }}
               />
             </div>
           </div>
@@ -161,11 +179,20 @@ export const SettingsPer = () => {
             </div>
             <div
               className="switch-button"
-              style={{ backgroundColor: "rgb(0, 133, 126)" }}
+              onClick={() => setTimeSw(!TimeSw)}
+              style={{
+                justifyContent: TimeSw ? "flex-end" : "flex-start",
+                border: TimeSw
+                  ? "2px solid rgb(0, 133, 126)"
+                  : "2px solid grey",
+                background: TimeSw ? "rgb(0, 133, 126)" : "transparent",
+              }}
             >
               <div
                 className="switch-inner"
-                style={{ backgroundColor: "rgb(255, 255, 255)" }}
+                style={{
+                  backgroundColor: TimeSw ? "#fff" : "rgb(130, 130, 130)",
+                }}
               />
             </div>
           </div>
@@ -197,11 +224,22 @@ export const SettingsPer = () => {
             </div>
             <div
               className="switch-button"
-              style={{ backgroundColor: "rgb(0, 133, 126)" }}
+              onClick={() => setNotificationSw(!NotificationSw)}
+              style={{
+                justifyContent: NotificationSw ? "flex-end" : "flex-start",
+                border: NotificationSw
+                  ? "2px solid rgb(0, 133, 126)"
+                  : "2px solid grey",
+                background: NotificationSw ? "rgb(0, 133, 126)" : "transparent",
+              }}
             >
               <div
                 className="switch-inner"
-                style={{ backgroundColor: "rgb(255, 255, 255)" }}
+                style={{
+                  backgroundColor: NotificationSw
+                    ? "#fff"
+                    : "rgb(130, 130, 130)",
+                }}
               />
             </div>
           </div>

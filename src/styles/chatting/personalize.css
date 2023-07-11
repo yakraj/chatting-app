@@ -85,19 +85,21 @@
   font-size: 1rem;
 }
 .switch-button {
-  height: 15px;
+  height: 20px;
   width: 35px;
   box-sizing: border-box;
   border-radius: 11px;
   justify-content: flex-start;
   display: flex;
   align-items: center;
+  cursor: pointer;
   padding-left: 2px;
+  border: 2px solid rgb(0, 133, 126);
   padding-right: 2px;
 }
 .switch-inner {
-  height: 8px;
-  width: 8px;
+  height: 10px;
+  width: 10px;
   box-sizing: border-box;
   border-radius: 11px;
   justify-content: center;

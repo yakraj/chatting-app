@@ -24,6 +24,12 @@ export const ChatNav = ({ activePer, setActivePer }) => {
           className="nav-item"
         >
           <img
+            style={{
+              filter:
+                activePer === "chats"
+                  ? "sepia(1) hue-rotate(18deg) contrast(84) brightness(5) hue-rotate(424deg) drop-shadow(2px 4px 6px black)"
+                  : "unset",
+            }}
             src={require("../../assects/chat.png")}
             className="image34701"
             alt="custom"
@@ -36,6 +42,12 @@ export const ChatNav = ({ activePer, setActivePer }) => {
           className="nav-item"
         >
           <img
+            style={{
+              filter:
+                activePer === "community"
+                  ? "sepia(1) hue-rotate(18deg) contrast(84) brightness(5) hue-rotate(424deg) drop-shadow(2px 4px 6px black)"
+                  : "unset",
+            }}
             src={require("../../assects/community.png")}
             className="image34701"
             alt="custom"
@@ -48,6 +60,12 @@ export const ChatNav = ({ activePer, setActivePer }) => {
           className="nav-item"
         >
           <img
+            style={{
+              filter:
+                activePer === "setting"
+                  ? "sepia(1) hue-rotate(18deg) contrast(84) brightness(5) hue-rotate(424deg) drop-shadow(2px 4px 6px black)"
+                  : "unset",
+            }}
             src={require("../../assects/setting.svg").default}
             className="image34701"
             alt="custom"
