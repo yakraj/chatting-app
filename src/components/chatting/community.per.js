@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export const CommunityPer = () => {
   const [showPending, setShowPending] = useState(false);
+  const [activeCommunityType, setActiveCommunityType] = useState("requests");
   const PendingCard = () => {
     return (
       <div className="division44297" style={{ height: "210px", margin: "5px" }}>
@@ -123,16 +124,7 @@ export const CommunityPer = () => {
   return (
     <>
       <div className="division15470">
-        <p className="heading-text">Peoples</p>
-        <p
-          style={{ background: showPending ? "red" : "green" }}
-          onClick={() => {
-            setShowPending(!showPending);
-          }}
-          className="pending-button"
-        >
-          {showPending ? "hide" : "pending..."}
-        </p>
+        <p className="heading-text">Community</p>
       </div>
       <div className="search-container">
         <input
@@ -147,59 +139,85 @@ export const CommunityPer = () => {
           alt="custom"
         />
       </div>
+      <div className="division34074" style={{ top: "33px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+            padding: "0 10px",
+            boxSizing: "border-box",
+            marginTop: "10px",
+          }}
+        >
+          <h1
+            style={{
+              color: activeCommunityType === "results" ? "green" : "grey",
+              fontWeight: activeCommunityType === "results" ? "bold" : "normal",
+            }}
+            onClick={() => setActiveCommunityType("results")}
+            className="text20358"
+          >
+            Results
+          </h1>
+          <h1
+            style={{
+              color: activeCommunityType === "requests" ? "green" : "grey",
+              fontWeight:
+                activeCommunityType === "requests" ? "bold" : "normal",
+            }}
+            onClick={() => setActiveCommunityType("requests")}
+            className="text20358"
+          >
+            Requests
+          </h1>
+          <h1
+            style={{
+              color: activeCommunityType === "pending" ? "green" : "grey",
+              fontWeight: activeCommunityType === "pending" ? "bold" : "normal",
+            }}
+            onClick={() => setActiveCommunityType("pending")}
+            className="text20358"
+          >
+            Pending
+          </h1>
+        </div>
+        <hr
+          style={{
+            width: "100%",
+            backgroundColor: "green",
+            margin: "0px",
+          }}
+        />
+      </div>
+      {/* this is going to be the search results cards contianer */}
 
-      <div className="search-result-container">
-        <div className="division34074" style={{ top: "35px" }}>
-          <h1 className="text20358">Results</h1>
-          <hr
-            style={{
-              width: "100%",
-              backgroundColor: "rgb(140, 140, 140)",
-              margin: "0px",
-            }}
-          />
+      {activeCommunityType === "results" && (
+        <div className="search-result-container">
+          <SearchResultCard />
+          <SearchResultCard />
         </div>
-        <SearchResultCard />
-        <SearchResultCard />
-      </div>
-      <div
-        style={{
-          height: showPending ? "auto" : "0px",
-          overflow: showPending ? "unset" : "hidden",
-        }}
-        className="search-result-container"
-      >
-        <div className="division34074" style={{ top: "35px" }}>
-          <h1 className="text20358">My Pending Requests</h1>
-          <hr
-            style={{
-              width: "100%",
-              backgroundColor: "rgb(140, 140, 140)",
-              margin: "0px",
-            }}
-          />
+      )}
+
+      {/* it is going to be the pending cards container */}
+      {activeCommunityType === "pending" && (
+        <div className="search-result-container">
+          <PendingCard />
+          <PendingCard />
+          <PendingCard />
         </div>
-        <PendingCard />
-        <PendingCard />
-        <PendingCard />
-      </div>
-      <div className="requests-container">
-        <div className="division34074" style={{ top: "35px" }}>
-          <h1 className="text20358">Requests</h1>
-          <hr
-            style={{
-              width: "100%",
-              backgroundColor: "rgb(140, 140, 140)",
-              margin: "0px",
-            }}
-          />
+      )}
+
+      {/* it is going to be the incoming requests card container */}
+      {activeCommunityType === "requests" && (
+        <div className="requests-container">
+          <IncomingRequestCard />
+          <IncomingRequestCard />
+          <IncomingRequestCard />
+          <IncomingRequestCard />
+          <IncomingRequestCard />
         </div>
-        <IncomingRequestCard />
-        <IncomingRequestCard />
-        <IncomingRequestCard />
-        <IncomingRequestCard />
-        <IncomingRequestCard />
-      </div>
+      )}
     </>
   );
 };

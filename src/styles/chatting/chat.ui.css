@@ -138,11 +138,12 @@
   box-sizing: border-box;
   padding: 10px 0px 0px;
   background-color: rgba(199, 199, 199, 0.3);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column-reverse;
   overflow-y: scroll;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 .leftside-chat-cont {
   height: auto;
