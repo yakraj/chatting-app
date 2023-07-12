@@ -3,6 +3,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Landing } from "./components/landing";
 import { Chatting } from "./components/chatting/chatting";
+import { MainProvider } from "./services/main.context";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,7 +16,11 @@ function App() {
       element: <Chatting />,
     },
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    <MainProvider>
+      <RouterProvider router={router} />
+    </MainProvider>
+  );
 }
 
 export default App;

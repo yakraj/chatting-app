@@ -2,15 +2,49 @@ import React, { useState } from "react";
 
 export const SettingsPer = () => {
   // switches state
-
+  const [activeSetting, setActiveSetting] = useState("");
   const [lastSeenSw, setLastSeenSw] = useState(false);
   const [TimeSw, setTimeSw] = useState(true);
   const [NotificationSw, setNotificationSw] = useState(true);
+  const [PersonName, setPersonName] = useState("Yakraj Pariyar");
+  const [penActive, setPenActive] = useState(false);
+  const [changeImage, setchangeImage] = useState(false);
+
+  const ChangeImagePop = () => {
+    return (
+      <div className="allcover-popup">
+        <div className="upload-poup">
+          <div className="division32536">
+            <div onClick={() => setchangeImage(false)} className="close-button">
+              <img
+                src="blob:https://generator.yakraj.com/fa6140c3-f311-49fd-994c-f47c4cd595ab"
+                className="image52633"
+                alt="custom"
+              />
+            </div>
+          </div>
+          <p className="preview-text">preview</p>
+          <div className="preview-avatar"></div>
+          <div className="division43188">
+            <input className="fileinput94501" type="file" />
+            <p className="upload-image-text">Upload image</p>
+          </div>
+          <input
+            type="text"
+            className="url-input-avatar"
+            placeholder="Place Your url here"
+          />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
+      {changeImage && <ChangeImagePop />}
       <div className="cover-image">
         <div
+          onClick={() => setchangeImage(true)}
           className="edit-button pointer"
           style={{
             borderRadius: "20px",
@@ -26,6 +60,7 @@ export const SettingsPer = () => {
       </div>
       <div className="avatar">
         <div
+          onClick={() => setchangeImage(true)}
           style={{
             borderRadius: "50%",
             background: "grey",
@@ -67,8 +102,14 @@ export const SettingsPer = () => {
         </div>
       </div>
       <div className="personalize-box">
-        <div className="single-control">
-          <div className="personalize-nav-content">
+        <div
+          style={{ height: activeSetting === "personalinfo" ? "auto" : "33px" }}
+          className="single-control"
+        >
+          <div
+            onClick={() => setActiveSetting("personalinfo")}
+            className="personalize-nav-content"
+          >
             <div className="personalize-nav-left">
               <img
                 src={require("../../assects/person.png")}
@@ -78,6 +119,12 @@ export const SettingsPer = () => {
               <p className="paragraph92257">personal info</p>
             </div>
             <img
+              style={{
+                transform:
+                  activeSetting === "personalinfo"
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+              }}
               src={require("../../assects/dropdown.png")}
               className="image86056"
               alt="custom"
@@ -86,26 +133,47 @@ export const SettingsPer = () => {
           <div className="nameedit">
             <div className="division17239">
               <p className="edit-personal-title">name</p>
-              <p
-                className="location-text"
-                style={{ textTransform: "capitalize" }}
+
+              {!penActive && (
+                <p
+                  className="location-text"
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {PersonName}
+                </p>
+              )}
+              {penActive && (
+                <input
+                  className="input27068"
+                  type="text"
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      setPenActive(false);
+                    }
+                  }}
+                  value={PersonName}
+                  onChange={(e) => setPersonName(e.target.value)}
+                />
+              )}
+            </div>
+            {!penActive && (
+              <div
+                onClick={() => {
+                  setPenActive(true);
+                }}
+                className="edit-button pointer"
+                style={{
+                  borderRadius: "5px",
+                  backgroundColor: "rgb(36, 181, 106)",
+                }}
               >
-                Yakraj Pariyar
-              </p>
-            </div>
-            <div
-              className="edit-button pointer "
-              style={{
-                borderRadius: "5px",
-                backgroundColor: "rgb(36, 181, 106)",
-              }}
-            >
-              <img
-                src={require("../../assects/pen.png")}
-                className="image64135"
-                alt="custom"
-              />
-            </div>
+                <img
+                  src={require("../../assects/pen.png")}
+                  className="image64135"
+                  alt="custom"
+                />
+              </div>
+            )}
           </div>
           <div className="nameedit" style={{ overflowY: "overlay" }}>
             <div className="division17239">
@@ -124,8 +192,14 @@ export const SettingsPer = () => {
             </div>
           </div>
         </div>
-        <div className="single-control">
-          <div className="personalize-nav-content">
+        <div
+          style={{ height: activeSetting === "privacy" ? "auto" : "33px" }}
+          className="single-control"
+        >
+          <div
+            onClick={() => setActiveSetting("privacy")}
+            className="personalize-nav-content"
+          >
             <div className="personalize-nav-left">
               <img
                 src={require("../../assects/privacy.png")}
@@ -135,6 +209,12 @@ export const SettingsPer = () => {
               <p className="paragraph92257">privacy</p>
             </div>
             <img
+              style={{
+                transform:
+                  activeSetting === "privacy"
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+              }}
               src={require("../../assects/dropdown.png")}
               className="image86056"
               alt="custom"
@@ -197,8 +277,14 @@ export const SettingsPer = () => {
             </div>
           </div>
         </div>
-        <div className="single-control">
-          <div className="personalize-nav-content">
+        <div
+          style={{ height: activeSetting === "security" ? "auto" : "33px" }}
+          className="single-control"
+        >
+          <div
+            onClick={() => setActiveSetting("security")}
+            className="personalize-nav-content"
+          >
             <div className="personalize-nav-left">
               <img
                 src={require("../../assects/security.png")}
@@ -208,6 +294,12 @@ export const SettingsPer = () => {
               <p className="paragraph92257">security</p>
             </div>
             <img
+              style={{
+                transform:
+                  activeSetting === "security"
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+              }}
               src={require("../../assects/dropdown.png")}
               className="image86056"
               alt="custom"
