@@ -57,17 +57,16 @@
   margin: 3px;
 }
 .division95556 {
-  height: 30px;
-  width: 30px;
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: rgba(98, 168, 89, 0.67);
   justify-content: center;
   display: flex;
   align-items: center;
 }
 .image53929 {
-  width: 20px;
+  width: 30px;
+  margin: 0 20px;
+  filter: invert(0.5);
 }
 .division54868 {
   height: 100%;
@@ -174,41 +173,44 @@
 }
 .chat-inputsec {
   width: 100%;
+  display: flex;
+  box-sizing: border-box;
   align-items: center;
   height: auto;
   justify-content: flex-start;
   box-shadow: rgb(0, 0, 0) 1px 0px 10px;
   position: sticky;
   bottom: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: #f0f2f5;
   margin-left: 0px;
   margin-right: 1px;
   padding-right: 5px;
   padding-left: 5px;
+  height: 75px;
 }
 .textarea38640::placeholder {
   color: #ffff;
 }
 .textarea38640 {
-  margin-left: 5px;
-  margin-right: 5px;
   outline: none;
-  background: rgba(145, 145, 145, 0.63);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.63);
+  color: #4d4d4d;
   border-radius: 7px;
   border: none;
   font-family: Helvetica;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
-  height: 30px;
+  height: 43px;
   width: 100%;
   margin: 5px;
-  font-size: 1rem;
+  font-size: 1.3rem;
   box-sizing: border-box;
-  padding-top: 5px;
+  padding-top: 10px;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  resize: none;
 }
 
 .division29438 {
@@ -246,4 +248,7 @@
 
 .show-pops:hover .division90631 {
   display: block;
+}
+.insideMessagecont {
+  width: 100%;
 }

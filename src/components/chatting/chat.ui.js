@@ -438,7 +438,7 @@ export const ChatUI = () => {
                 </div>
               </div>
             </div>
-            <div className="division24344 leftside-chat-cont chat-inputsec">
+            <div className="chat-inputsec">
               <div className="division95556">
                 <img
                   src={require("../../assects/camera.png")}
