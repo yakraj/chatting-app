@@ -9,6 +9,14 @@ export const MainContext = createContext();
 export const MainProvider = ({ children }) => {
   const [chat, setChat] = useState([]);
   const [activeChats, setActiveChats] = useState([]);
+  const [currentUser, setcurrentUser] = useState([]);
+
+  let meuser = {
+    name: "yakraj pariyar",
+    userid: "Alice",
+    address: "sinnar nashik mumbai",
+    desc: "senior developer",
+  };
   let chattings = [
     {
       id: 1,
@@ -79,7 +87,8 @@ export const MainProvider = ({ children }) => {
       userfrom: "Bob",
       userto: "Alice",
       textmsg: "Absolutely! It keeps getting better with each episode.",
-      imagemsg: "",
+      imagemsg:
+        "https://fastly.picsum.photos/id/0/200/200.jpg?hmac=RZmZI0kb9l_aRWHFyOZUGyc8xsyV30HOJX8a4wuHWkA",
       viewed: false,
       date: "2023-07-12",
     },
@@ -88,7 +97,8 @@ export const MainProvider = ({ children }) => {
       userfrom: "Alice",
       userto: "Bob",
       textmsg: "Hey, are you free this weekend? Let's catch up for coffee.",
-      imagemsg: "",
+      imagemsg:
+        "https://fastly.picsum.photos/id/0/200/200.jpg?hmac=RZmZI0kb9l_aRWHFyOZUGyc8xsyV30HOJX8a4wuHWkA,https://fastly.picsum.photos/id/955/200/200.jpg?hmac=_m3ln1pswsR9s9hWuWrwY_O6N4wizKmukfhvyaTrkjE,https://fastly.picsum.photos/id/912/200/200.jpg?hmac=tYYyMFni6bya5yEVkwmmFekjWGedHVByLtPI5q1lcyw,https://fastly.picsum.photos/id/567/200/200.jpg?hmac=S36MAHt-ylBTK3Xv7FsIbcN71oDHJpgvjWRzbRiBb48",
       viewed: true,
       date: "2023-07-13",
     },
@@ -150,6 +160,7 @@ export const MainProvider = ({ children }) => {
 
   useEffect(() => {
     setActiveChats(chattings);
+    setcurrentUser(meuser);
   }, []);
 
   // Add a new chat message
@@ -158,7 +169,9 @@ export const MainProvider = ({ children }) => {
   };
 
   return (
-    <MainContext.Provider value={{ chat, addChatMessage, activeChats }}>
+    <MainContext.Provider
+      value={{ chat, addChatMessage, activeChats, currentUser }}
+    >
       {children}
     </MainContext.Provider>
   );
