@@ -8,8 +8,92 @@ export const ChatUI = () => {
   const [popTdot, onpopTdot] = useState(false);
   const [deletedot, ondeletedot] = useState(false);
 
-  const { activeChats } = useContext(MainContext);
-  console.log(activeChats);
+  const { activeChats, currentUser } = useContext(MainContext);
+
+  const WithImageChat = ({ data }) => {
+    return (
+      <div
+        style={{
+          justifyContent:
+            data.userfrom === currentUser.userid ? "flex-end" : "flex-start",
+        }}
+        className="division66826"
+      >
+        <div
+          className="division12604"
+          style={{
+            height: "auto",
+            maxWidth: "40%",
+            justifyContent:
+              data.userfrom === currentUser.userid ? "flex-end" : "flex-start",
+            alignItems:
+              data.userfrom === currentUser.userid ? "flex-end" : "flex-start",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              background:
+                data.userfrom === currentUser.userid
+                  ? "rgba(73, 176, 60, 0.61)"
+                  : "#fff",
+            }}
+            className="division38533"
+          >
+            {data.imagemsg && (
+              <div className="Imagescontainer">
+                {data.imagemsg.split(",").map((x, i) => {
+                  return (
+                    <img src={x} className="image79354" key={i} alt="custom" />
+                  );
+                })}
+              </div>
+            )}
+            <p
+              className="paragraph59683"
+              style={{
+                color:
+                  data.userfrom === currentUser.userid
+                    ? "rgb(255, 255, 255)"
+                    : "rgb(117, 117, 117)",
+                textAlign:
+                  data.userfrom === currentUser.userid ? "end" : "start",
+                borderRadius: "5px",
+              }}
+            >
+              {data.textmsg}
+            </p>
+          </div>
+          <p
+            className="paragraph59683"
+            style={{
+              color: "rgb(79, 79, 79)",
+              backgroundColor: "rgba(255, 255, 255, 0)",
+            }}
+          >
+            9:30 AM
+            {data.userfrom === currentUser.userid && (
+              <>
+                <img
+                  src={require("../../assects/tick.svg").default}
+                  width="15px"
+                  alt="custom"
+                />
+                <img
+                  src={require("../../assects/tick.svg").default}
+                  className="image69136"
+                  alt="custom"
+                  width="15px"
+                />
+              </>
+            )}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="division54868">
@@ -206,238 +290,11 @@ export const ChatUI = () => {
                 </p>
               </div>
             </div>
-            <div className="division66826">
-              <div
-                className="division12604"
-                style={{
-                  height: "auto",
-                  width: "30%",
-                  justifyContent: "flex-end",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                }}
-              >
-                <p className="paragraph59683 mytext-chat right-text">
-                  Everything is going well yar. are you going outdoor this
-                  sunday ?
-                </p>
-                <p
-                  className="paragraph59683"
-                  style={{
-                    color: "rgb(79, 79, 79)",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                  }}
-                >
-                  9:30 AM
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                </p>
-              </div>
-            </div>
-            <div
-              className="division24344 leftside-chat-cont"
-              style={{
-                height: "auto",
-                width: "100%",
-                alignItems: "self-start",
-                paddingLeft: "10px",
-              }}
-            >
-              <div
-                className="division12604"
-                style={{ height: "auto", width: "30%" }}
-              >
-                <p className="paragraph59683 left-text">
-                  No, Mamma is going to solukhumbu, so I wont be able to give
-                  you company.
-                </p>
-                <p
-                  className="paragraph59683"
-                  style={{
-                    color: "rgb(79, 79, 79)",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                  }}
-                >
-                  9:30 AM
-                </p>
-              </div>
-            </div>
-            <div className="division66826">
-              <div
-                className="division12604"
-                style={{
-                  height: "auto",
-                  width: "390px",
-                  justifyContent: "flex-end",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                }}
-              >
-                <div className="division38533">
-                  <img
-                    src={require("../../assects/image1.png")}
-                    className="image79354"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/image2.png")}
-                    className="image79354"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/image3.png")}
-                    className="image79354"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/image4.png")}
-                    className="image79354"
-                    alt="custom"
-                  />
-                  <p
-                    className="paragraph59683"
-                    style={{
-                      color: "rgb(255, 255, 255)",
-                      backgroundColor: "rgba(255, 255, 255, 0)",
-                      textAlign: "end",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    Everything is going well yar. are you going outdoor this
-                    sunday ?
-                  </p>
-                </div>
-                <p
-                  className="paragraph59683"
-                  style={{
-                    color: "rgb(79, 79, 79)",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                  }}
-                >
-                  9:30 AM
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                </p>
-              </div>
-            </div>
-            <div
-              className="division24344 leftside-chat-cont"
-              style={{
-                height: "auto",
-                width: "100%",
-                alignItems: "self-start",
-                paddingLeft: "10px",
-              }}
-            >
-              <div
-                className="division12604"
-                style={{ height: "auto", width: "30%" }}
-              >
-                <p className="paragraph59683 left-text">
-                  wow ......................................... Images are such
-                  charming, but still I can’t go this time, can we plan another
-                  date........
-                </p>
-                <p
-                  className="paragraph59683"
-                  style={{
-                    color: "rgb(79, 79, 79)",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                  }}
-                >
-                  9:30 AM
-                </p>
-              </div>
-            </div>
-            <div className="division66826">
-              <div
-                className="division12604"
-                style={{
-                  height: "auto",
-                  width: "30%",
-                  justifyContent: "flex-end",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                }}
-              >
-                <p className="paragraph59683 mytext-chat right-text">
-                  I’ll need to talk with boys, but all of them are very excited
-                  about this tour, you can think again..!!
-                </p>
-                <p
-                  className="paragraph59683"
-                  style={{
-                    color: "rgb(79, 79, 79)",
-                    backgroundColor: "rgba(255, 255, 255, 0)",
-                  }}
-                >
-                  9:30 AM
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                  <img
-                    src={require("../../assects/tick.svg").default}
-                    className="image69136"
-                    alt="custom"
-                  />
-                </p>
-              </div>
-            </div>
-            <div
-              className="division24344 leftside-chat-cont"
-              style={{
-                height: "auto",
-                width: "100%",
-                alignItems: "self-start",
-                paddingLeft: "10px",
-              }}
-            >
-              <div
-                className="division12604"
-                style={{ height: "50px", width: "30%" }}
-              >
-                <div className="division53219">
-                  <p
-                    className="paragraph59683"
-                    style={{
-                      color: "rgb(255, 255, 255)",
-                      backgroundColor: "rgba(209, 224, 206, 0)",
-                      textAlign: "end",
-                      borderRadius: "5px",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    typing
-                  </p>
-                  <img
-                    src={require("../../assects/typing-dots.png")}
-                    className="image16478"
-                    alt="custom"
-                  />
-                </div>
-              </div>
-            </div>
+
+            {activeChats.map((x, i) => {
+              return <WithImageChat key={i} data={x} />;
+            })}
+
             <div className="chat-inputsec">
               <div className="division95556">
                 <img
