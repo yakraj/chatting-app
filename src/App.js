@@ -6,7 +6,6 @@ import { Chatting } from "./components/chatting/chatting";
 import { MainProvider } from "./services/main.context";
 import { LoginPage } from "./components/auth/login.page";
 import { SignUpPage } from "./components/auth/signup.page";
-asdfasdf;
 
 function App() {
   // a router
