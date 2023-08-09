@@ -11,23 +11,40 @@ export const SettingsPer = () => {
   const [changeImage, setchangeImage] = useState(false);
 
   const ChangeImagePop = () => {
+    const [ImageURL, setImageURL] = useState();
+
+    const handleFileInputChange = (event) => {
+      const [file] = event.target.files;
+      let localURL;
+      if (file) {
+        localURL = URL.createObjectURL(file);
+      }
+      setImageURL(localURL);
+    };
     return (
       <div className="allcover-popup">
         <div className="upload-poup">
           <div className="division32536">
             <div onClick={() => setchangeImage(false)} className="close-button">
               <img
-                src="blob:https://generator.yakraj.com/fa6140c3-f311-49fd-994c-f47c4cd595ab"
-                className="image52633"
+                src={require("../../assects/close.svg").default}
+                className="image52633 pointer"
                 alt="custom"
               />
             </div>
           </div>
           <p className="preview-text">preview</p>
-          <div className="preview-avatar"></div>
-          <div className="division43188">
-            <input className="fileinput94501" type="file" />
-            <p className="upload-image-text">Upload image</p>
+          <div
+            style={{ backgroundImage: `url(${ImageURL})` }}
+            className="preview-avatar"
+          ></div>
+          <div className="division43188 ">
+            <input
+              onChange={handleFileInputChange}
+              className="fileinput94501"
+              type="file"
+            />
+            <p className="upload-image-text pointer">Upload image</p>
           </div>
           <input
             type="text"
