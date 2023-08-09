@@ -9,13 +9,16 @@ export const MainContext = createContext();
 export const MainProvider = ({ children }) => {
   const [chat, setChat] = useState([]);
   const [activeChats, setActiveChats] = useState([]);
-  const [currentUser, setcurrentUser] = useState([]);
+  const [currentUser, setcurrentUser] = useState();
 
   let meuser = {
-    name: "yakraj pariyar",
-    userid: "Alice",
-    address: "sinnar nashik mumbai",
+    name: "Alice William",
     desc: "senior developer",
+    userid: "Alice",
+    email: "alicedev@developer.com",
+    address: "chicago U.S",
+    // cover: "",
+    avatar:"https://funkylife.in/wp-content/uploads/2023/02/cute-girl-pic-2-1024x1024.jpg"
   };
   let chattings = [
     {

@@ -22,6 +22,10 @@ export const InfoUser = ({ infoOn, setinfoOn }) => {
         <h1 className="text50755" style={{ margin: "0px" }}>
           yakraj pariyar
         </h1>
+
+        <h2 style={{ fontSize: "1rem" }} className="text80595">
+          ceo and co-founder
+        </h2>
         <div className="address-container-info" style={{ width: "159px" }}>
           <img
             src={require("../../assects/location.png")}
