@@ -8,6 +8,7 @@ import { LoginPage } from "./components/auth/login.page";
 import { SignUpPage } from "./components/auth/signup.page";
 
 function App() {
+  // a router renders here
   const router = createBrowserRouter([
     {
       path: "/",
