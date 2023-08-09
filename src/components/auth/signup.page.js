@@ -11,10 +11,28 @@ export const SignUpPage = () => {
             <input type="file" />
           </div>
           <div className="input-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Name</label>
             <input type="text" name="username" id="username" placeholder />
           </div>
           <div className="input-group">
+            <label htmlFor="username">Title/Designation</label>
+            <input type="text" name="username" id="username" placeholder />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Address</label>
+            <input type="text" name="username" id="username" placeholder />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Email Address</label>
+            <input type="email" name="username" id="username" placeholder />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">username</label>
+            <input type="email" name="username" id="username" placeholder />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input type="password" name="password" id="password" placeholder />
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" placeholder />
             <div className="forgot">
@@ -27,7 +45,7 @@ export const SignUpPage = () => {
           <div className="social-icons">
             <p className="signup-container">
               Already an account?
-              <a rel="noopener noreferrer" href="#" className>
+              <a rel="noopener noreferrer" href="/login" className>
                 Sign In
               </a>
             </p>

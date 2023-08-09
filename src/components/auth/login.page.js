@@ -23,7 +23,7 @@ export const LoginPage = () => {
           <div className="social-icons">
             <p className="signup-container">
               Don't have an account?
-              <a rel="noopener noreferrer" href="#" className>
+              <a rel="noopener noreferrer" href="/signup" className>
                 Sign up
               </a>
             </p>

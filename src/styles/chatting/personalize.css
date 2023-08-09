@@ -254,6 +254,13 @@
   margin: 0px;
   color: rgb(168, 168, 168);
 }
+.text80595 {
+  font-weight: lighter;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin: 0px;
+  color: rgb(168, 168, 168);
+}
 .archive-address {
   height: 19.5px;
   width: 100%;
@@ -620,16 +627,23 @@
   background-image: url("https://funkylife.in/wp-content/uploads/2023/02/cute-girl-pic-2-1024x1024.jpg");
 }
 .division81716 {
-  height: 70px;
   width: 100%;
   box-sizing: border-box;
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding-top: 20px;
   border-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: grey;
+  padding-bottom: 10px;
+}
+.division81716 h2 {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 1rem;
+  text-transform: capitalize;
 }
 .division73450 {
   height: auto;

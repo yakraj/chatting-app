@@ -9,6 +9,7 @@ export const CommunityPer = () => {
         <div className="division53176"></div>
         <div className="division69090"></div>
         <h1 className="text80594">yakraj pariyar</h1>
+        <h2 className="text80595">ceo and co-founder</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
@@ -52,6 +53,8 @@ export const CommunityPer = () => {
         <div className="division53176"></div>
         <div className="division69090"></div>
         <h1 className="text80594">yakraj pariyar</h1>
+
+        <h2 className="text80595">ceo and co-founder</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
@@ -86,6 +89,8 @@ export const CommunityPer = () => {
         <div className="division53176"></div>
         <div className="division69090"></div>
         <h1 className="text80594">yakraj pariyar</h1>
+
+        <h2 className="text80595">ceo and co-founder</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
