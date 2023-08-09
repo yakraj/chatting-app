@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext,useEffect, useState } from "react";
+import { MainContext } from "../../services/main.context";
 
 export const SettingsPer = () => {
   // switches state
@@ -6,9 +7,15 @@ export const SettingsPer = () => {
   const [lastSeenSw, setLastSeenSw] = useState(false);
   const [TimeSw, setTimeSw] = useState(true);
   const [NotificationSw, setNotificationSw] = useState(true);
-  const [PersonName, setPersonName] = useState("Yakraj Pariyar");
+  const [PersonName, setPersonName] = useState("");
   const [penActive, setPenActive] = useState(false);
   const [changeImage, setchangeImage] = useState(false);
+  const { currentUser } = useContext(MainContext);
+  useEffect(() => {
+    if (currentUser) {
+      setPersonName(currentUser.name);
+    }
+  }, []);
 
   const ChangeImagePop = () => {
     return (
@@ -80,7 +87,10 @@ export const SettingsPer = () => {
         </div>
       </div>
       <div className="user-details">
-        <h1 className="text76396">yakraj Pariyar</h1>
+        <h1 className="text76396">{currentUser && currentUser.name}</h1>
+        <h2 style={{ fontSize: "0.9rem" }} className="text80595">
+          {currentUser && currentUser.desc}
+        </h2>
         <div className="status-container">
           <div className="division18565" />
           <p className="status-text">active</p>
@@ -97,7 +107,7 @@ export const SettingsPer = () => {
             alt="custom"
           />
           <p className="location-text" style={{ textTransform: "capitalize" }}>
-            mumbai, maharashtra
+            {currentUser && currentUser.address}
           </p>
         </div>
       </div>
@@ -179,7 +189,7 @@ export const SettingsPer = () => {
             <div className="division17239">
               <p className="edit-personal-title">email</p>
               <p className="location-text" style={{ textTransform: "none" }}>
-                yakraj@gmail.com
+                {currentUser && currentUser.email}
               </p>
             </div>
           </div>
@@ -187,7 +197,7 @@ export const SettingsPer = () => {
             <div className="division17239">
               <p className="edit-personal-title">username</p>
               <p className="location-text" style={{ textTransform: "none" }}>
-                @yakraj
+                @ {currentUser && currentUser.userid}
               </p>
             </div>
           </div>

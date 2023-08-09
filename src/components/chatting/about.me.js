@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MainContext } from "../../services/main.context";
 
 export const AboutMe = ({ setActivePer }) => {
+  const { currentUser } = useContext(MainContext);
+
   return (
     <>
       <div className="division67935">
@@ -43,8 +46,11 @@ export const AboutMe = ({ setActivePer }) => {
           className="title-about-person"
           style={{ color: "rgb(153, 153, 153)" }}
         >
-          jenifer lofez
+          {currentUser && currentUser.name}
         </h1>
+        <h2 style={{ color: "rgb(153, 153, 153)" }}>
+          {currentUser && currentUser.desc}
+        </h2>
       </div>
       <div className="division73450">
         <div className="division35651">
@@ -53,7 +59,7 @@ export const AboutMe = ({ setActivePer }) => {
             className="image47802"
             alt="custom"
           />
-          <p className="paragraph52603">yarkarj pariyar</p>
+          <p className="paragraph52603"> {currentUser && currentUser.name}</p>
         </div>
         <div className="division35651">
           <img
@@ -61,7 +67,7 @@ export const AboutMe = ({ setActivePer }) => {
             className="image47802"
             alt="custom"
           />
-          <p className="paragraph52603">yakarj@gmail.com</p>
+          <p className="paragraph52603"> {currentUser && currentUser.email}</p>
         </div>
         <div className="division35651">
           <img
@@ -69,7 +75,9 @@ export const AboutMe = ({ setActivePer }) => {
             className="image47802"
             alt="custom"
           />
-          <p className="paragraph52603">@yakraj</p>
+          <p className="paragraph52603">
+            @ {currentUser && currentUser.userid}
+          </p>
         </div>
         <div className="division35651">
           <img
@@ -77,7 +85,7 @@ export const AboutMe = ({ setActivePer }) => {
             className="image47802"
             alt="custom"
           />
-          <p className="paragraph52603">mumbai, maharashtra</p>
+          <p className="paragraph52603">{currentUser && currentUser.address}</p>
         </div>
       </div>
     </>

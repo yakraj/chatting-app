@@ -7,7 +7,8 @@
 }
 
 .form-container-box {
-  height: 100vh;
+  min-height: 100vh;
+  padding: 5vh 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -34,9 +35,19 @@
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#295270", endColorstr="#524175", GradientType=1 );
 }
+.user-avatar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
 
 .user-avatar-container {
   height: 100px;
+  width: 100px;
+  border: 1px solid azure;
+  border-radius: 50%;
 }
 
 .title {
@@ -153,4 +164,7 @@
   font-size: 0.75rem;
   line-height: 1rem;
   color: rgba(156, 163, 175, 1);
+}
+.signup-container a {
+  color: azure;
 }
