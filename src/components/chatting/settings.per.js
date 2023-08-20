@@ -1,4 +1,4 @@
-import React, { useContext,useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
 
 export const SettingsPer = () => {

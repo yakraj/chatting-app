@@ -5,7 +5,7 @@ export const CommunityPer = () => {
   const [activeCommunityType, setActiveCommunityType] = useState("requests");
   const PendingCard = () => {
     return (
-      <div className="division44297" style={{ height: "210px", margin: "5px" }}>
+      <div className="division44297" style={{ margin: "5px" }}>
         <div className="division53176"></div>
         <div className="division69090"></div>
         <h1 className="text80594">yakraj pariyar</h1>
