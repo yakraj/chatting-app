@@ -5,35 +5,39 @@ export const ChatsPer = ({ setActivePer }) => {
   const { ChatArchive, currentUser, MockUsers } = useContext(MainContext);
   const [activeChatType, setActiveChatType] = useState("all");
 
-  const SingleMessage = ({ data }) => {
-    const [MessagerDetails, setMessagerDetails] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+  // it will find active status and thumbnail and name of user1
+  const [ModChatArchive, setModChatArchive] = useState([]);
 
-    useEffect(() => {
-      if (data.user1 === currentUser.userid) {
-        let Messanger = MockUsers.find((x) => x.userid === data.user2);
-        setMessagerDetails(Messanger);
+  useEffect(() => {
+    const UpdatedArchives = [];
+
+    ChatArchive.forEach((x) => {
+      let tempobject = x;
+      if (x.user1 === currentUser.userid) {
+        let Messanger = MockUsers.find((y) => y.userid === x.user2);
+        tempobject = { ...tempobject, ...Messanger };
       } else {
-        let Messanger = MockUsers.find((x) => x.userid === data.user1);
-        setMessagerDetails(Messanger);
+        let Messanger = MockUsers.find((y) => y.userid === x.user1);
+        console.log(x.user1, Messanger);
       }
-    }, []);
+      UpdatedArchives.push(tempobject);
+    });
 
-    console.log(MessagerDetails);
+    setModChatArchive(UpdatedArchives);
+  }, []);
 
+  const SingleMessage = ({ data }) => {
     return (
       <div class="single-message-archive">
         <div
-          style={{ backgroundImage: `url(${MessagerDetails.avatar})` }}
+          style={{ backgroundImage: `url(${data.avatar})` }}
           class="division45412"
         >
           <div class="division74473"></div>
         </div>
         <div class="division52428">
-          <p class="message-archive-title">{MessagerDetails.name}</p>
-          <p class="message-archive-lastmsg">
-            what are you doing this morning ?
-          </p>
+          <p class="message-archive-title">{data.name}</p>
+          <p class="message-archive-lastmsg">{data.lastmsg}</p>
         </div>
       </div>
     );
@@ -91,16 +95,29 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be all messages container */}
       {activeChatType === "all" && (
         <div className="message-archive-container">
-          {ChatArchive.map((x, i) => {
-            return <SingleMessage key={i} data={x} name="jenifer lopez" />;
-          })}
+          {ModChatArchive.length ? (
+            ModChatArchive.map((x, i) => {
+              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+            })
+          ) : (
+            <div>
+              <h1>No messages found</h1>
+            </div>
+          )}
         </div>
       )}
       {/* this will be active container */}
       {activeChatType === "active" && (
         <div className="message-archive-container">
-          <SingleMessage name="james bond" />
-          <SingleMessage name="james bond" />
+          {ChatArchive.length ? (
+            ChatArchive.map((x, i) => {
+              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+            })
+          ) : (
+            <div>
+              <h1>No messages found</h1>
+            </div>
+          )}
         </div>
       )}{" "}
       {/* this will be favourite  container */}
