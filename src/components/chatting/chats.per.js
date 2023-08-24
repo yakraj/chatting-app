@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { MainContext } from "../../services/main.context";
 
 export const ChatsPer = ({ setActivePer }) => {
+  const { ChatArchive, currentUser, MockUsers } = useContext(MainContext);
   const [activeChatType, setActiveChatType] = useState("all");
 
-  const SingleMessage = ({ name }) => {
+  const SingleMessage = ({ data }) => {
+    const [MessagerDetails, setMessagerDetails] = useState([]);
+    const [isLoading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (data.user1 === currentUser.userid) {
+        let Messanger = MockUsers.find((x) => x.userid === data.user2);
+        setMessagerDetails(Messanger);
+      } else {
+        let Messanger = MockUsers.find((x) => x.userid === data.user1);
+        setMessagerDetails(Messanger);
+      }
+    }, []);
+
+    console.log(MessagerDetails);
+
     return (
       <div class="single-message-archive">
-        <div class="division45412">
+        <div
+          style={{ backgroundImage: `url(${MessagerDetails.avatar})` }}
+          class="division45412"
+        >
           <div class="division74473"></div>
         </div>
         <div class="division52428">
-          <p class="message-archive-title">{name}</p>
+          <p class="message-archive-title">{MessagerDetails.name}</p>
           <p class="message-archive-lastmsg">
             what are you doing this morning ?
           </p>
@@ -71,8 +91,9 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be all messages container */}
       {activeChatType === "all" && (
         <div className="message-archive-container">
-          <SingleMessage name="jenifer lopez" />
-          <SingleMessage name="jenifer lopez" />
+          {ChatArchive.map((x, i) => {
+            return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+          })}
         </div>
       )}
       {/* this will be active container */}

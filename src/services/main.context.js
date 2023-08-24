@@ -3,8 +3,8 @@
 import React, { createContext, useState, useEffect } from "react";
 
 import {
-  AllChatArchive,
-  CharArchiveDetails,
+  MockUsers,
+  ChatArchive,
   FavouriteArchives,
   chattings,
 } from "./mock.data";
@@ -21,11 +21,10 @@ export const MainProvider = ({ children }) => {
     name: "Alice William",
     desc: "senior developer",
     userid: "Alice",
-    email: "alicedev@developer.com",
+    email: "alicedev@trial.com",
     address: "chicago U.S",
-    // cover: "",
-    avatar:
-      "https://funkylife.in/wp-content/uploads/2023/02/cute-girl-pic-2-1024x1024.jpg",
+    cover: "https://picsum.photos/id/237/200/300",
+    avatar: "https://picsum.photos/id/237/200/300",
   };
 
   useEffect(() => {
@@ -40,7 +39,14 @@ export const MainProvider = ({ children }) => {
 
   return (
     <MainContext.Provider
-      value={{ chat, addChatMessage, AllChatArchive, activeChats, currentUser }}
+      value={{
+        chat,
+        addChatMessage,
+        MockUsers,
+        ChatArchive,
+        activeChats,
+        currentUser,
+      }}
     >
       {children}
     </MainContext.Provider>
