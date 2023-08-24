@@ -6,6 +6,7 @@ export const MockUsers = [
     email: "alicedev@trial.com",
     address: "Chicago, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -15,6 +16,7 @@ export const MockUsers = [
     email: "bobdev@trial.com",
     address: "New York, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -24,6 +26,7 @@ export const MockUsers = [
     email: "charliedev@trial.com",
     address: "Los Angeles, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -33,6 +36,7 @@ export const MockUsers = [
     email: "davidsmith@trial.com",
     address: "San Francisco, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -42,6 +46,7 @@ export const MockUsers = [
     email: "emmadavis@trial.com",
     address: "Seattle, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -51,6 +56,7 @@ export const MockUsers = [
     email: "frankwilson@trial.com",
     address: "Boston, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -60,6 +66,7 @@ export const MockUsers = [
     email: "gracetaylor@trial.com",
     address: "Austin, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -69,6 +76,7 @@ export const MockUsers = [
     email: "henryanderson@trial.com",
     address: "Denver, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -78,6 +86,7 @@ export const MockUsers = [
     email: "isabellamartinez@trial.com",
     address: "Miami, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -87,6 +96,7 @@ export const MockUsers = [
     email: "jackthompson@trial.com",
     address: "Houston, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -96,6 +106,7 @@ export const MockUsers = [
     email: "katelewis@trial.com",
     address: "Philadelphia, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -105,6 +116,7 @@ export const MockUsers = [
     email: "liamturner@trial.com",
     address: "Portland, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -114,6 +126,7 @@ export const MockUsers = [
     email: "miawalker@trial.com",
     address: "San Diego, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -123,6 +136,7 @@ export const MockUsers = [
     email: "noahhill@trial.com",
     address: "Dallas, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -132,6 +146,7 @@ export const MockUsers = [
     email: "oliviascott@trial.com",
     address: "Atlanta, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -141,6 +156,7 @@ export const MockUsers = [
     email: "petergreen@trial.com",
     address: "Phoenix, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -150,6 +166,7 @@ export const MockUsers = [
     email: "quinnturner@trial.com",
     address: "Charlotte, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -159,6 +176,7 @@ export const MockUsers = [
     email: "ryanadams@trial.com",
     address: "Nashville, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -168,6 +186,7 @@ export const MockUsers = [
     email: "sophiabaker@trial.com",
     address: "Orlando, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -177,6 +196,7 @@ export const MockUsers = [
     email: "thomasclark@trial.com",
     address: "Las Vegas, U.S.",
     cover: "https://picsum.photos/200.jpg",
+    onilne: false,
     avatar: "https://picsum.photos/200.jpg",
   },
   {
@@ -186,6 +206,7 @@ export const MockUsers = [
     email: "contact@yakraj.com",
     address: "Mumbai india",
     cover: "https://picsum.photos/200.jpg",
+    onilne: true,
     avatar: "https://picsum.photos/200.jpg",
   },
 ];
@@ -194,6 +215,15 @@ export const ChatArchive = [
     id: 1,
     user1: "Alice",
     user2: "Thomas",
+    lastmsg: "actully i want this.",
+    recenttime: "Thu Aug 24 2023 05:49:00 GMT+0530 (India Standard Time)",
+    chatid: "yakrajthomas",
+    favourite: "true",
+  },
+  {
+    id: 1,
+    user1: "Alice",
+    user2: "Emma",
     lastmsg: "actully i want this.",
     recenttime: "Thu Aug 24 2023 05:49:00 GMT+0530 (India Standard Time)",
     chatid: "yakrajthomas",
