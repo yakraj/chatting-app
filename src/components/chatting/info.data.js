@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/chatting/info.data.css";
 
-export const InfoUser = ({ infoOn, setinfoOn }) => {
+export const InfoUser = ({ infoOn, information, setinfoOn }) => {
   return (
     <div style={{ width: infoOn ? "45%" : "0px" }} className="blurry-container">
       <div className="chat-nav absolute-nav">
@@ -17,14 +17,14 @@ export const InfoUser = ({ infoOn, setinfoOn }) => {
       <div className="division81937">
         <div
           className="profile-avatar"
-          src="blob:https://generator.yakraj.com/9988e94c-cbb2-44a0-b54d-e1daa8f31c38"
+          style={{ backgroundImage: `url(${information.avatar})` }}
         ></div>
         <h1 className="text50755" style={{ margin: "0px" }}>
-          yakraj pariyar
+          {information.name}
         </h1>
 
         <h2 style={{ fontSize: "1rem" }} className="text80595">
-          ceo and co-founder
+          {information.desc}
         </h2>
         <div className="address-container-info" style={{ width: "159px" }}>
           <img
@@ -32,7 +32,7 @@ export const InfoUser = ({ infoOn, setinfoOn }) => {
             className="image89335"
             alt="custom"
           />
-          <p className="paragraph87029">mumbai india</p>
+          <p className="paragraph87029">{information.address}</p>
         </div>
         <div className="address-container-info" style={{ width: "auto" }}>
           <img
@@ -42,7 +42,7 @@ export const InfoUser = ({ infoOn, setinfoOn }) => {
           />
           <p className="paragraph87029" style={{ display: "block" }}>
             connected since:{" "}
-            <strong className="strong82192">12 jan 2022</strong>
+            <strong className="strong82192">12 june 2023</strong>
           </p>
         </div>
         <div className="media-container">

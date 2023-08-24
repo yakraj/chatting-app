@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
 
 export const ChatsPer = ({ setActivePer }) => {
-  const { ChatArchive, currentUser, MockUsers } = useContext(MainContext);
+  const { ChatArchive, currentUser, MockUsers, AciveChat } =
+    useContext(MainContext);
   const [activeChatType, setActiveChatType] = useState("all");
 
   // it will find active status and thumbnail and name of user1
@@ -28,12 +29,18 @@ export const ChatsPer = ({ setActivePer }) => {
 
   const SingleMessage = ({ data }) => {
     return (
-      <div class="single-message-archive">
+      <div
+        onClick={() => AciveChat(data.chatid, data.userid)}
+        class="single-message-archive"
+      >
         <div
           style={{ backgroundImage: `url(${data.avatar})` }}
           class="division45412"
         >
-          <div class="division74473"></div>
+          <div
+            style={{ background: data.onilne ? "#00bf73" : "#fdc60a" }}
+            class="division74473"
+          ></div>
         </div>
         <div class="division52428">
           <p class="message-archive-title">{data.name}</p>
@@ -109,8 +116,8 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be active container */}
       {activeChatType === "active" && (
         <div className="message-archive-container">
-          {ChatArchive.length ? (
-            ChatArchive.map((x, i) => {
+          {ModChatArchive.filter((x) => x.onilne === true).length ? (
+            ModChatArchive.filter((x) => x.onilne === true).map((x, i) => {
               return <SingleMessage key={i} data={x} name="jenifer lopez" />;
             })
           ) : (
@@ -119,7 +126,7 @@ export const ChatsPer = ({ setActivePer }) => {
             </div>
           )}
         </div>
-      )}{" "}
+      )}
       {/* this will be favourite  container */}
       {activeChatType === "favourite" && (
         <div className="message-archive-container">

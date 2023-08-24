@@ -1,6 +1,9 @@
 .division66768 {
   box-sizing: border-box;
   border-radius: 25px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 5px grey;
 }
 .text88532 {
   margin: 0px;

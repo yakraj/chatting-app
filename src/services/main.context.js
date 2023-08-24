@@ -7,6 +7,7 @@ import {
   ChatArchive,
   FavouriteArchives,
   chattings,
+  StoredMessages,
 } from "./mock.data";
 // Create the context
 export const MainContext = createContext();
@@ -16,7 +17,7 @@ export const MainProvider = ({ children }) => {
   const [chat, setChat] = useState([]);
   const [activeChats, setActiveChats] = useState([]);
   const [currentUser, setcurrentUser] = useState();
-
+  const [activeChatUser, setActiveChatUser] = useState();
   let meuser = {
     name: "Alice William",
     desc: "senior developer",
@@ -28,9 +29,15 @@ export const MainProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setActiveChats(chattings);
     setcurrentUser(meuser);
   }, []);
+
+  const AciveChat = (chatid, chatuser) => {
+    let FindChats = StoredMessages.find((x) => x.chatid === chatid);
+    let ActiveChatUser = MockUsers.find((x) => x.userid === chatuser);
+    setActiveChatUser(ActiveChatUser);
+    setActiveChats(FindChats.chats);
+  };
 
   // Add a new chat message
   const addChatMessage = (message) => {
@@ -46,6 +53,8 @@ export const MainProvider = ({ children }) => {
         ChatArchive,
         activeChats,
         currentUser,
+        AciveChat,
+        activeChatUser,
       }}
     >
       {children}
