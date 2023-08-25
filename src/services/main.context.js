@@ -44,6 +44,22 @@ export const MainProvider = ({ children }) => {
     setChat((prevChat) => [...prevChat, message]);
   };
 
+  // this is message function for create message
+
+  const SendMessage = (data) => {
+    let tempChat = {
+      id: 1,
+      userfrom: "Alice",
+      userto: "Thomas",
+      textmsg: "Hey Bob, how are you?",
+      imagemsg: "",
+      viewed: true,
+      date: "2023-07-10",
+    };
+
+    console.log(data);
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -55,6 +71,7 @@ export const MainProvider = ({ children }) => {
         currentUser,
         AciveChat,
         activeChatUser,
+        SendMessage,
       }}
     >
       {children}
