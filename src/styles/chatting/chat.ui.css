@@ -215,6 +215,7 @@
   align-items: center;
   overflow: hidden;
   resize: none;
+  box-shadow: 0 0 5px grey;
 }
 
 .division29438 {
