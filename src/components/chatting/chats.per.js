@@ -2,49 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
 
 export const ChatsPer = ({ setActivePer }) => {
-  const { ChatArchive, currentUser, MockUsers, AciveChat } =
-    useContext(MainContext);
+  const { currentUser, AciveChat, ChatArchives } = useContext(MainContext);
   const [activeChatType, setActiveChatType] = useState("all");
 
   // it will find active status and thumbnail and name of user1
   const [ModChatArchive, setModChatArchive] = useState([]);
 
-  useEffect(() => {
-    const UpdatedArchives = [];
-
-    ChatArchive.forEach((x) => {
-      let tempobject = x;
-      if (x.user1 === currentUser.userid) {
-        let Messanger = MockUsers.find((y) => y.userid === x.user2);
-        tempobject = { ...tempobject, ...Messanger };
-      } else {
-        let Messanger = MockUsers.find((y) => y.userid === x.user1);
-        console.log(x.user1, Messanger);
-      }
-      UpdatedArchives.push(tempobject);
-    });
-
-    setModChatArchive(UpdatedArchives);
-  }, []);
-
   const SingleMessage = ({ data }) => {
     return (
-      <div
-        onClick={() => AciveChat(data.chatid, data.userid)}
-        class="single-message-archive"
-      >
+      <div onClick={() => AciveChat(data)} className="single-message-archive">
         <div
           style={{ backgroundImage: `url(${data.avatar})` }}
-          class="division45412"
+          className="division45412"
         >
           <div
-            style={{ background: data.onilne ? "#00bf73" : "#fdc60a" }}
-            class="division74473"
+            style={{ background: data.onilne ? "#fdc60a" : "#00bf73" }}
+            className="division74473"
           ></div>
         </div>
-        <div class="division52428">
-          <p class="message-archive-title">{data.name}</p>
-          <p class="message-archive-lastmsg">{data.lastmsg}</p>
+        <div className="division52428">
+          <p className="message-archive-title">{data.name}</p>
+          <p className="message-archive-lastmsg">
+            {data.lastmsg.substring(0, 30) + "..."}
+          </p>
         </div>
       </div>
     );
@@ -52,29 +32,29 @@ export const ChatsPer = ({ setActivePer }) => {
 
   return (
     <>
-      <div class="division15470">
-        <p class="heading-text">Peoples</p>
-        <p onClick={() => setActivePer("community")} class="pending-button">
+      <div className="division15470">
+        <p className="heading-text">Peoples</p>
+        <p onClick={() => setActivePer("community")} className="pending-button">
           +
         </p>
       </div>
-      <div class="search-container">
-        <input type="text" class="input27068" placeholder="Your Text" />
+      <div className="search-container">
+        <input type="text" className="input27068" placeholder="Your Text" />
         <img
           width="25px"
           src={require("../../assects/search.png")}
-          class="image35932"
+          className="image35932"
           alt="custom"
         />
       </div>
-      <div class="messages-tab-nav">
+      <div className="messages-tab-nav">
         <p
           style={{
             color: activeChatType === "all" ? "green" : "grey",
             fontWeight: activeChatType === "all" ? "bold" : "normal",
           }}
           onClick={() => setActiveChatType("all")}
-          class="paragraph48560"
+          className="paragraph48560"
         >
           all
         </p>
@@ -84,7 +64,7 @@ export const ChatsPer = ({ setActivePer }) => {
             fontWeight: activeChatType === "active" ? "bold" : "normal",
           }}
           onClick={() => setActiveChatType("active")}
-          class="paragraph48560"
+          className="paragraph48560"
         >
           active
         </p>
@@ -94,7 +74,7 @@ export const ChatsPer = ({ setActivePer }) => {
             fontWeight: activeChatType === "favourite" ? "bold" : "normal",
           }}
           onClick={() => setActiveChatType("favourite")}
-          class="paragraph48560"
+          className="paragraph48560"
         >
           favourites
         </p>
@@ -102,8 +82,8 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be all messages container */}
       {activeChatType === "all" && (
         <div className="message-archive-container">
-          {ModChatArchive.length ? (
-            ModChatArchive.map((x, i) => {
+          {ChatArchives.length ? (
+            ChatArchives.map((x, i) => {
               return <SingleMessage key={i} data={x} name="jenifer lopez" />;
             })
           ) : (
@@ -116,8 +96,8 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be active container */}
       {activeChatType === "active" && (
         <div className="message-archive-container">
-          {ModChatArchive.filter((x) => x.onilne === true).length ? (
-            ModChatArchive.filter((x) => x.onilne === true).map((x, i) => {
+          {ChatArchives.find((x) => x.online === true) ? (
+            ChatArchives.filter((x) => x.online === true).map((x, i) => {
               return <SingleMessage key={i} data={x} name="jenifer lopez" />;
             })
           ) : (
@@ -130,8 +110,11 @@ export const ChatsPer = ({ setActivePer }) => {
       {/* this will be favourite  container */}
       {activeChatType === "favourite" && (
         <div className="message-archive-container">
-          <SingleMessage name="tom cruise" />
-          <SingleMessage name="tom cruise" />
+          {ChatArchives.filter((x) => x.favourite !== null)
+            .filter((x) => x.favourite.includes(currentUser.userid))
+            .map((x, i) => {
+              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+            })}
         </div>
       )}
     </>

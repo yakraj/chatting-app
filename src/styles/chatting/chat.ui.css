@@ -9,7 +9,18 @@
   margin: 0px;
   text-transform: capitalize;
 }
-
+.ticksign {
+  height: 8px;
+  width: 16px;
+  border-left: 3px;
+  border-bottom: 3px;
+  border-color: green;
+  border-radius: 2px;
+  border-style: solid;
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg);
+}
 .image16277:hover {
   padding: 5px;
   /* border: 1px solid grey; */
@@ -156,7 +167,6 @@
 }
 .division38533 {
   height: auto;
-  width: 100%;
   box-sizing: border-box;
   background-color: rgba(73, 176, 60, 0.61);
   border-radius: 5px;

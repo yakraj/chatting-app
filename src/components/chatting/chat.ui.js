@@ -2,15 +2,44 @@ import React, { useState, useContext } from "react";
 import "../../styles/chatting/chat.ui.css";
 import { InfoUser } from "./info.data";
 import { MainContext } from "../../services/main.context";
+import { ChattingUInav } from "./chatting.ui.nav";
 export const ChatUI = () => {
-  const [infoOn, setinfoOn] = useState(false);
-  const [searchOpend, onSearchOpend] = useState(false);
-  const [popTdot, onpopTdot] = useState(false);
-  const [deletedot, ondeletedot] = useState(false);
   const [ChatText, setChatText] = useState("");
 
-  const { activeChats, currentUser, activeChatUser, SendMessage } =
-    useContext(MainContext);
+  const {
+    activeChats,
+    currentUser,
+    activeChatUser,
+    ActiveCArchive,
+    SingleChatCreate,
+    StoredMessages,
+  } = useContext(MainContext);
+
+  // this function will crete random string for messageid inside a specific GetChatidChats
+
+  function generateRandomTextWithDate() {
+    const currentDate = new Date()
+      .toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "2-digit",
+      })
+      .replace(/\//g, "");
+    const randomText = Array.from({ length: 30 }, () =>
+      Math.random().toString(36).charAt(2)
+    ).join("");
+    const randomizedDate = currentDate
+      .split("")
+      .sort(() => 0.5 - Math.random())
+      .join("");
+    return `${randomText}_${randomizedDate}`;
+  }
+
+  // this is time formater
+  function formatTime(date) {
+    const options = { hour: "2-digit", minute: "2-digit", hour12: true };
+    return date.toLocaleTimeString("en-US", options);
+  }
 
   const WithImageChat = ({ data }) => {
     return (
@@ -43,7 +72,7 @@ export const ChatUI = () => {
             }}
             className="division38533"
           >
-            {data.imagemsg && (
+            {data.imagemsg.length ? (
               <div className="Imagescontainer">
                 {data.imagemsg.split(",").map((x, i) => {
                   return (
@@ -51,7 +80,7 @@ export const ChatUI = () => {
                   );
                 })}
               </div>
-            )}
+            ) : null}
             <p
               className="paragraph59683"
               style={{
@@ -74,21 +103,22 @@ export const ChatUI = () => {
               backgroundColor: "rgba(255, 255, 255, 0)",
             }}
           >
-            9:30 AM
+            {formatTime(new Date(data.date))}
             {data.userfrom === currentUser.userid && (
-              <>
-                <img
-                  src={require("../../assects/tick.svg").default}
-                  width="15px"
-                  alt="custom"
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  paddingBottom: "5px",
+                }}
+              >
+                <div
+                  style={{ borderColor: data.delivery ? "green" : "grey" }}
+                  className="ticksign"
                 />
-                <img
-                  src={require("../../assects/tick.svg").default}
-                  className="image69136"
-                  alt="custom"
-                  width="15px"
-                />
-              </>
+
+                {data.delivery && <div className="ticksign" />}
+              </div>
             )}
           </p>
         </div>
@@ -97,13 +127,16 @@ export const ChatUI = () => {
   };
 
   return (
-    activeChatUser && (
+    ActiveCArchive && (
       <>
         <div className="division54868">
+          <ChattingUInav />
           <div className="division36662">
             <div className="insideMessagecont">
-              {activeChats.length &&
-                activeChats.map((x, i) => {
+              {StoredMessages.length &&
+                StoredMessages.find(
+                  (x) => x.chatid === ActiveCArchive.chatid
+                ).chats.map((x, i) => {
                   return <WithImageChat key={i} data={x} />;
                 })}
 
@@ -116,20 +149,22 @@ export const ChatUI = () => {
                   />
                 </div>
                 <textarea
+                  value={ChatText}
                   onChange={(e) => setChatText(e.target.value)}
                   type="text"
                   className="textarea38640"
                 />
                 <div
-                  onClick={() =>
-                    SendMessage({
+                  onClick={() => {
+                    SingleChatCreate({
                       chattext: ChatText,
-                      userto: activeChatUser.userid,
+                      userto: ActiveCArchive.userid,
                       userfrom: currentUser.userid,
-                      chatid: "alicethomas",
-                      date: new Date(),
-                    })
-                  }
+                      messageid: generateRandomTextWithDate(),
+                      chatid: ActiveCArchive.chatid,
+                      inputData: setChatText,
+                    });
+                  }}
                   className="division95556"
                 >
                   <img
@@ -142,11 +177,11 @@ export const ChatUI = () => {
             </div>
           </div>
         </div>
-        <InfoUser
+        {/* <InfoUser
           infoOn={infoOn}
           information={activeChatUser}
           setinfoOn={setinfoOn}
-        />
+        /> */}
       </>
     )
   );

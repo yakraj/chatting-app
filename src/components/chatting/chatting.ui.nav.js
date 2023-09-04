@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { MainContext } from "../../services/main.context";
 
-export const ChattingUInav = (data) => {
+export const ChattingUInav = () => {
+  const { ActiveCArchive } = useContext(MainContext);
+
+  const [searchOpend, onSearchOpend] = useState(false);
+  const [popTdot, onpopTdot] = useState(false);
+  const [infoOn, setinfoOn] = useState(false);
+  const [deletedot, ondeletedot] = useState(false);
   return (
     <div className="division33537 chat-nav">
       <div className="division39121 chat-nav-left">
@@ -9,7 +16,7 @@ export const ChattingUInav = (data) => {
           style={{
             height: "45px",
             width: "45px",
-            backgroundImage: `url(${activeChatUser.avatar})`,
+            backgroundImage: `url(${ActiveCArchive.avatar})`,
             backgroundColor: "rgb(99, 105, 143)",
             position: "relative",
           }}
@@ -20,7 +27,7 @@ export const ChattingUInav = (data) => {
               height: "15px",
               boxShadow: "0 0 5px grey, 0 0 7px #000",
               width: "15px",
-              background: activeChatUser.onilne ? "#00bf73" : "#fdc60a",
+              background: ActiveCArchive.online ? "#00bf73" : "#fdc60a",
               position: "absolute",
               right: "0px",
               bottom: "0px",
@@ -32,7 +39,7 @@ export const ChattingUInav = (data) => {
             className="text88532"
             style={{ fontSize: "1rem", color: "rgb(171, 171, 171)" }}
           >
-            {activeChatUser && activeChatUser.name}
+            {ActiveCArchive && ActiveCArchive.name}
           </h1>
           <h1
             className="text88532"
@@ -42,7 +49,7 @@ export const ChattingUInav = (data) => {
               color: "rgb(46, 75, 240)",
             }}
           >
-            {activeChatUser.onilne ? "online" : "offline"}
+            {ActiveCArchive.online ? "online" : "offline"}
           </h1>
         </div>
       </div>
