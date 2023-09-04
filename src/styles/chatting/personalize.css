@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
 }
+
 .image64135 {
   width: 15px;
 }
@@ -232,10 +233,19 @@
 }
 .division53176 {
   background-size: cover;
-  height: 80px;
+  height: 100px;
+  background-position: center;
   width: 100%;
   box-sizing: border-box;
   background-image: url("https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg");
+}
+.reqchattext {
+  outline: none;
+  border-radius: 5px;
+  padding: 4px;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: grey 0px 0px 5px;
 }
 .division69090 {
   height: 60px;
@@ -315,18 +325,18 @@
   width: 90%;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .image67949 {
-  width: 10px;
+  width: 35px;
 }
 .paragraph42157 {
   font-size: 0.8rem;
   margin: 0px;
-  font-weight: 600;
+  text-align: center;
   color: rgb(158, 158, 158);
-  line-height: 13px;
 }
 .requested-date-button {
   text-transform: capitalize;

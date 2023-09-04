@@ -1,22 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { MainContext } from "../../services/main.context";
+import {
+  AcceptRequest,
+  ReqConnect,
+  SingleUser,
+} from "../../services/main.service";
+import { Loader } from "../loader";
 
 export const CommunityPer = () => {
   const [showPending, setShowPending] = useState(false);
   const [activeCommunityType, setActiveCommunityType] = useState("requests");
-  const PendingCard = () => {
+  const [typingTimer, setTypingTimer] = useState();
+
+  // here i'l utilizing useContext
+  const {
+    Searchusers,
+    SearchUsersVal,
+    currentUser,
+    RequestsVal,
+    PendingRequestsVal,
+  } = useContext(MainContext);
+
+  const handleChange = (e) => {
+    clearTimeout(typingTimer);
+
+    setTypingTimer(
+      setTimeout(() => {
+        if (e.target.value.length >= 3) {
+          Searchusers(e.target.value);
+          setActiveCommunityType("results");
+        } else {
+          if (e.target.value.length > 0) {
+            window.alert("user details must be more than 3 characters");
+          }
+        }
+      }, 500)
+    );
+  };
+
+  const PendingCard = ({ data }) => {
     return (
       <div className="division44297" style={{ margin: "5px" }}>
-        <div className="division53176"></div>
-        <div className="division69090"></div>
-        <h1 className="text80594">yakraj pariyar</h1>
-        <h2 className="text80595">ceo and co-founder</h2>
+        <div
+          style={{
+            backgroundImage: `url(${data.cover})`,
+          }}
+          className="division53176"
+        ></div>
+        <div
+          style={{
+            backgroundImage: `url(${data.avatar})`,
+          }}
+          className="division69090"
+        ></div>
+        <h1 className="text80594">{data.name}</h1>
+        <h2 className="text80595">{data.desig}</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
             className="image72541"
             alt="custom"
           />
-          <p className="paragraph88375">mumbai Maharashtra</p>
+          <p className="paragraph88375">{data.address}</p>
         </div>
         <div className="last-send-req-message">
           <img
@@ -24,10 +69,7 @@ export const CommunityPer = () => {
             className="image67949"
             alt="custom"
           />
-          <p className="paragraph42157">
-            hello there i'm yakraj pariyar from dynamic, our organization gave
-            me your username for chat.
-          </p>
+          <p className="paragraph42157">{data.message}</p>
         </div>
         <div className="division51510">
           <button
@@ -41,35 +83,58 @@ export const CommunityPer = () => {
           >
             cancel
           </button>
-          <button className="requested-date-button">07/06/2023</button>
+          <button className="requested-date-button">
+            {data.date.substring(0, 10)}
+          </button>
         </div>
       </div>
     );
   };
 
-  const SearchResultCard = () => {
-    return (
-      <div className="division44297" style={{ height: "210px", margin: "5px" }}>
-        <div className="division53176"></div>
-        <div className="division69090"></div>
-        <h1 className="text80594">yakraj pariyar</h1>
+  const SearchResultCard = ({ data }) => {
+    const [ReqMessage, setReqMessage] = useState("");
 
-        <h2 className="text80595">ceo and co-founder</h2>
+    const SendReq = () => {
+      // console.log("you can create req now");
+      ReqConnect({
+        reqfrom: currentUser.userid,
+        reqto: data.userid,
+        message: ReqMessage,
+      });
+    };
+
+    return (
+      <div
+        className="division44297"
+        style={{ height: "auto", paddingBottom: "15px", margin: "5px" }}
+      >
+        <div
+          style={{ backgroundImage: `url(${data.cover})` }}
+          className="division53176"
+        ></div>
+        <div
+          style={{ backgroundImage: `url(${data.avatar})` }}
+          className="division69090"
+        ></div>
+        <h1 className="text80594">{data.name}</h1>
+
+        <h2 className="text80595">{data.desig}</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
             className="image72541"
             alt="custom"
           />
-          <p className="paragraph88375">mumbai Maharashtra</p>
+          <p className="paragraph88375">{data.address}</p>
         </div>
-        <input
-          type="text"
-          className="input72282"
-          placeholder="Type your message"
-        />
+        <textarea
+          onChange={(e) => setReqMessage(e.target.value)}
+          placeholder="Your Mesage Here..."
+          className="reqchattext"
+        ></textarea>
         <button
           className="button20350"
+          onClick={() => SendReq()}
           style={{
             borderRadius: "10px",
             padding: "4px",
@@ -83,24 +148,45 @@ export const CommunityPer = () => {
     );
   };
 
-  const IncomingRequestCard = () => {
+  const IncomingRequestCard = ({ data }) => {
     return (
-      <div className="division44297" style={{ height: "200px", margin: "5px" }}>
-        <div className="division53176"></div>
-        <div className="division69090"></div>
-        <h1 className="text80594">yakraj pariyar</h1>
+      <div className="division44297" style={{ height: "auto", margin: "5px" }}>
+        <div
+          style={{
+            backgroundImage: `url(${data.cover})`,
+          }}
+          className="division53176"
+        ></div>
+        <div
+          style={{
+            backgroundImage: `url(${data.avatar})`,
+          }}
+          className="division69090"
+        ></div>
+        <h1 className="text80594">{data.name}</h1>
 
-        <h2 className="text80595">ceo and co-founder</h2>
+        <h2 className="text80595">{data.desig}</h2>
         <div className="archive-address">
           <img
             src={require("../../assects/location.png")}
             className="image72541"
             alt="custom"
           />
-          <p className="paragraph88375">mumbai Maharashtra</p>
+          <p className="paragraph88375">{data.address}</p>
+        </div>
+        <div className="last-send-req-message">
+          <img
+            src={require("../../assects/chat.png")}
+            className="image67949"
+            alt="custom"
+          />
+          <p className="paragraph42157">{data.message}</p>
         </div>
         <div className="division51510">
           <button
+            onClick={() => {
+              AcceptRequest(data.reqfrom, data.reqto, data.reqid);
+            }}
             className="button20350"
             style={{
               borderRadius: "25px",
@@ -135,6 +221,7 @@ export const CommunityPer = () => {
         <input
           type="text"
           className="input27068"
+          onChange={handleChange}
           placeholder="Type your message"
         />
         <img
@@ -199,28 +286,30 @@ export const CommunityPer = () => {
 
       {activeCommunityType === "results" && (
         <div className="search-result-container">
-          <SearchResultCard />
-          <SearchResultCard />
+          {SearchUsersVal.length &&
+            SearchUsersVal.map((x, i) => {
+              return <SearchResultCard key={i} data={x} />;
+            })}
         </div>
       )}
 
       {/* it is going to be the pending cards container */}
       {activeCommunityType === "pending" && (
         <div className="search-result-container">
-          <PendingCard />
-          <PendingCard />
-          <PendingCard />
+          {PendingRequestsVal.length &&
+            PendingRequestsVal.map((x, i) => {
+              return <PendingCard data={x} key={i} />;
+            })}
         </div>
       )}
 
       {/* it is going to be the incoming requests card container */}
       {activeCommunityType === "requests" && (
         <div className="requests-container">
-          <IncomingRequestCard />
-          <IncomingRequestCard />
-          <IncomingRequestCard />
-          <IncomingRequestCard />
-          <IncomingRequestCard />
+          {RequestsVal.length &&
+            RequestsVal.map((x, i) => {
+              return <IncomingRequestCard data={x} key={i} />;
+            })}
         </div>
       )}
     </>
