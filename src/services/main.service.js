@@ -144,5 +144,5 @@ export const LoginUser = (umail, pass) => {
       umail: umail,
       pass: pass,
     }),
-  }).then((response) => response.JSON());
+  }).then((response) => response.json());
 };

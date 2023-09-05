@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../services/main.context";
 // import "./style.css";
@@ -9,14 +9,20 @@ export const LoginPage = () => {
   const navigation = useNavigate();
   const [umail, setumail] = useState("");
   const [pass, setpass] = useState("");
-
+  const [goback, setgoback] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (goback) {
+      navigation("/chatting");
+    }
+  }, [goback]);
 
   return (
     <div className="form-container-box">
       <div className="form-container">
         <p className="title">Login</p>
-        <form onSubmit={(e) => e.preventDefault(acn)} className="form">
+        <form onSubmit={(e) => e.preventDefault(e)} className="form">
           <div className="input-group">
             <label htmlFor="username">Username</label>
             <input
@@ -46,7 +52,7 @@ export const LoginPage = () => {
             type="buttom"
             onClick={() => {
               if (umail.length > 3 && pass.length > 3) {
-                UserLogin(umail, pass);
+                UserLogin(umail, pass, setgoback);
               } else {
                 setError("please fill required field");
               }

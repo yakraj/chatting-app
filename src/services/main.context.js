@@ -113,12 +113,14 @@ export const MainProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setcurrentUser(meuser);
-    ChatRequests(meuser.userid, setRequestsVal);
-    PendingRequests(meuser.userid, setPendingRequestsVal);
-    GetChatArchives(meuser.userid).then((requests) => {
-      setChatArchives(requests);
-    });
+    // setcurrentUser(meuser);
+    if (currentUser) {
+      ChatRequests(meuser.userid, setRequestsVal);
+      PendingRequests(meuser.userid, setPendingRequestsVal);
+      GetChatArchives(meuser.userid).then((requests) => {
+        setChatArchives(requests);
+      });
+    }
   }, []);
 
   const AciveChat = (data) => {
@@ -198,8 +200,16 @@ export const MainProvider = ({ children }) => {
 
   // here we will handle user crediantials
 
-  const UserLogin = (umail, pass) => {
-    LoginUser(umail, pass).then((Credential) => console.log(Credential));
+  const UserLogin = (umail, pass, setgoback) => {
+    LoginUser(umail, pass)
+      .then((Credential) => {
+        if (Credential.length) {
+          console.log(Credential);
+          setcurrentUser(Credential[0]);
+          setgoback(true);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
