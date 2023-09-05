@@ -113,11 +113,16 @@ export const ChatUI = () => {
                 }}
               >
                 <div
-                  style={{ borderColor: data.delivery ? "green" : "grey" }}
+                  style={{ borderColor: data.seen ? "green" : "grey" }}
                   className="ticksign"
                 />
 
-                {data.delivery && <div className="ticksign" />}
+                {data.delivery && (
+                  <div
+                    style={{ borderColor: data.seen ? "green" : "grey" }}
+                    className="ticksign"
+                  />
+                )}
               </div>
             )}
           </p>

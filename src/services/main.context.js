@@ -12,6 +12,7 @@ import {
   GetChatidChats,
   PoolChat,
   SendSeenStatus,
+  LoginUser,
 } from "./main.service";
 
 // Create the context
@@ -195,6 +196,12 @@ export const MainProvider = ({ children }) => {
     });
   };
 
+  // here we will handle user crediantials
+
+  const UserLogin = (umail, pass) => {
+    LoginUser(umail, pass).then((Credential) => console.log(Credential));
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -213,6 +220,7 @@ export const MainProvider = ({ children }) => {
         PendingRequestsVal,
         ChatArchives,
         StoredMessages,
+        UserLogin,
       }}
     >
       {children}

@@ -132,3 +132,17 @@ export const SendSeenStatus = (userid, chatid) => {
     .then((response) => response.json())
     .catch((err) => console.log(err));
 };
+
+// this function will handle crediantials
+// firstly here we will go for login
+
+export const LoginUser = (umail, pass) => {
+  return fetch(Server + "login", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      umail: umail,
+      pass: pass,
+    }),
+  }).then((response) => response.JSON());
+};

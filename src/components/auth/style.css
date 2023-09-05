@@ -9,6 +9,7 @@
 .form-container-box {
   min-height: 100vh;
   padding: 5vh 0;
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -43,11 +44,35 @@
   flex-direction: column;
 }
 
+.user-avatar-container:hover img {
+  opacity: 1;
+}
 .user-avatar-container {
   height: 100px;
   width: 100px;
+  cursor: pointer;
   border: 1px solid azure;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  > input {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  > img {
+    opacity: 0;
+    width: 35px;
+    filter: invert(0.1);
+    transition-duration: 0.3s;
+    left: 30%;
+    position: relative;
+  }
 }
 
 .title {
@@ -167,4 +192,9 @@
 }
 .signup-container a {
   color: azure;
+}
+
+.linktext {
+  text-decoration: underline;
+  cursor: pointer;
 }
