@@ -168,3 +168,27 @@ export const GetOnlineStatus = (users) => {
     }),
   }).then((response) => response.json());
 };
+
+// here we will start to code about seen message which will control
+//send seen request and get values from server
+
+export const SendSeenData = (userid, chatid) => {
+  return fetch(Server + "crete/chats/seen-send/status", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userid: userid,
+      chatid: chatid,
+    }),
+  }).then((response) => response.json());
+};
+
+export const ReqSeenData = (userid) => {
+  return fetch(Server + "get/chats/seen-status", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userid: userid,
+    }),
+  }).then((response) => response.json());
+};

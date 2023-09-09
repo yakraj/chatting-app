@@ -15,6 +15,8 @@ import {
   LoginUser,
   SendOnlineStatus,
   GetOnlineStatus,
+  SendSeenData,
+  ReqSeenData,
 } from "./main.service";
 
 // Create the context
@@ -35,26 +37,59 @@ export const MainProvider = ({ children }) => {
   const [ChatArchives, setChatArchives] = useState([]);
   const [StoredMessages, setStoredMessages] = useState([]);
 
+  //these are some updater for useeffect
   const StorageMRef = useRef();
+  const ActiveArchiveRef = useRef();
+
   // this useEffect will handle all kind of changes in ChatArchives and update itself
   useEffect(() => {
     StorageMRef.current = StoredMessages;
   }, [StoredMessages]);
+  // it will do the same like previous code but update another one
+  useEffect(() => {
+    ActiveArchiveRef.current = ActiveCArchive;
+  }, [ActiveCArchive]);
 
   // this useeffect will send my
   useEffect(() => {
     if (currentUser) {
-      console.log("send online data");
       setInterval(() => {
         SendOnlineStatus(currentUser.userid);
       }, 60000);
     }
   }, [currentUser]);
 
+  // from the live runner it will get updted seen data and set it to the stored messages
+
+  useEffect(() => {
+    if (currentUser) {
+      function CreateSeenRq() {
+        ReqSeenData(currentUser.userid).then((data) => {
+          // console.log(data);
+
+          if (data.length && Array.isArray(data)) {
+            let tempStorage = [...StorageMRef.current];
+
+            data.forEach((x) => {
+              let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
+              let findchats = findChatA.chats.filter(
+                (msg) => msg.userfrom === data.userid
+              );
+              console.log(findchats);
+            });
+          }
+          setTimeout(() => {
+            CreateSeenRq();
+          }, 3000);
+        });
+      }
+      CreateSeenRq();
+    }
+  }, [currentUser]);
+
   // and this useEffect will find all changes and get partner status in each 1.5 minutes
   useEffect(() => {
     const AllusersStatus = () => {
-      console.log("asked online data");
       let tempUsers = [];
       ChatArchives.forEach((x) => {
         tempUsers.push(x.userid);
@@ -62,7 +97,6 @@ export const MainProvider = ({ children }) => {
 
       GetOnlineStatus(tempUsers).then((data) => {
         let tempArchives = [...ChatArchives];
-        console.log("got response");
         if (data.length && Array.isArray(data)) {
           data.forEach((sts) => {
             let findexist = tempArchives.find(
@@ -81,7 +115,6 @@ export const MainProvider = ({ children }) => {
       }, 90000);
     }
   }, [ChatArchives.length]);
-  console.log(StoredMessages);
   useEffect(() => {
     if (ChatArchives.length) {
       ChatArchives.forEach((x) => {
@@ -124,8 +157,13 @@ export const MainProvider = ({ children }) => {
         setExecutedPoll(true);
         PoolChat(currentUser.userid)
           .then((data) => {
-            console.log("returned");
             PollMaker();
+            //here after getting response send seen status of any message
+            SendSeenData(
+              ActiveArchiveRef.current.userid,
+              ActiveArchiveRef.current.chatid
+            );
+
             if (data.length) {
               let tempStoredData = [...StorageMRef.current];
 
@@ -133,7 +171,6 @@ export const MainProvider = ({ children }) => {
                 (x) => x.chatid === data[0].chatid
               );
               findExactArchive.chats.push(data[0]);
-              console.log("i received data", tempStoredData);
               setStoredMessages(tempStoredData);
               if (ActiveCArchive) {
                 SendSeenStatus(ActiveCArchive.userid, ActiveCArchive.chatid);
@@ -163,6 +200,7 @@ export const MainProvider = ({ children }) => {
 
   const AciveChat = (data) => {
     setActiveCArchive(data);
+    SendSeenData(data.chatid, data.userid);
     SendSeenStatus(data.userid, data.chatid);
   };
 
