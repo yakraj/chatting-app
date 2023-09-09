@@ -1,6 +1,6 @@
 // ChatContext.js
 
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 
 import { MockUsers, FavouriteArchives, chattings } from "./mock.data";
 import {
@@ -13,6 +13,8 @@ import {
   PoolChat,
   SendSeenStatus,
   LoginUser,
+  SendOnlineStatus,
+  GetOnlineStatus,
 } from "./main.service";
 
 // Create the context
@@ -33,56 +35,105 @@ export const MainProvider = ({ children }) => {
   const [ChatArchives, setChatArchives] = useState([]);
   const [StoredMessages, setStoredMessages] = useState([]);
 
+  const StorageMRef = useRef();
   // this useEffect will handle all kind of changes in ChatArchives and update itself
+  useEffect(() => {
+    StorageMRef.current = StoredMessages;
+  }, [StoredMessages]);
+
+  // this useeffect will send my
+  useEffect(() => {
+    if (currentUser) {
+      console.log("send online data");
+      setInterval(() => {
+        SendOnlineStatus(currentUser.userid);
+      }, 60000);
+    }
+  }, [currentUser]);
+
+  // and this useEffect will find all changes and get partner status in each 1.5 minutes
+  useEffect(() => {
+    const AllusersStatus = () => {
+      console.log("asked online data");
+      let tempUsers = [];
+      ChatArchives.forEach((x) => {
+        tempUsers.push(x.userid);
+      });
+
+      GetOnlineStatus(tempUsers).then((data) => {
+        let tempArchives = [...ChatArchives];
+        console.log("got response");
+        if (data.length && Array.isArray(data)) {
+          data.forEach((sts) => {
+            let findexist = tempArchives.find(
+              (exst) => exst.userid === sts.userid
+            );
+            findexist.online = sts.online;
+          });
+          setChatArchives(tempArchives);
+        }
+      });
+    };
+
+    if (ChatArchives.length) {
+      setInterval(() => {
+        AllusersStatus();
+      }, 90000);
+    }
+  }, [ChatArchives.length]);
+  console.log(StoredMessages);
   useEffect(() => {
     if (ChatArchives.length) {
       ChatArchives.forEach((x) => {
-        if (StoredMessages.length) {
-          StoredMessages.forEach((y) => {
-            if (x.chatid === y.chatid) {
-            } else {
-              let tempsingledemo = {
-                id: StoredMessages.length + 1,
-                chatid: x.chatid,
-                chats: [],
-              };
-              GetChatidChats(x.chatid).then((response) => {
+        if (StorageMRef.current.length) {
+          let findThischat = StorageMRef.current.find(
+            (y) => x.chatid === y.chatid
+          );
+          if (!findThischat) {
+            let tempsingledemo = {
+              id: StorageMRef.current.length + 1,
+              chatid: x.chatid,
+              chats: [],
+            };
+            GetChatidChats(x.chatid)
+              .then((response) => {
                 tempsingledemo.chats = response;
-                setStoredMessages([...StoredMessages, tempsingledemo]);
-              });
-            }
-          });
+                setStoredMessages([...StorageMRef.current, tempsingledemo]);
+              })
+              .catch((err) => console.log(err));
+          }
         } else {
           let tempsingledemo = {
-            id: StoredMessages.length + 1,
+            id: StorageMRef.current.length + 1,
             chatid: x.chatid,
             chats: [],
           };
           GetChatidChats(x.chatid).then((response) => {
             tempsingledemo.chats = response;
-            setStoredMessages([...StoredMessages, tempsingledemo]);
+            setStoredMessages([...StorageMRef.current, tempsingledemo]);
           });
         }
       });
     }
     return;
-  }, [ChatArchives, StoredMessages]);
+  }, [ChatArchives.length]);
 
   useEffect(() => {
-    if (currentUser && StoredMessages.length && !ExecutedPoll) {
+    if (currentUser && !ExecutedPoll) {
       const PollMaker = () => {
         setExecutedPoll(true);
         PoolChat(currentUser.userid)
           .then((data) => {
+            console.log("returned");
             PollMaker();
             if (data.length) {
-              let tempStoredData = [...StoredMessages];
+              let tempStoredData = [...StorageMRef.current];
 
               let findExactArchive = tempStoredData.find(
                 (x) => x.chatid === data[0].chatid
               );
               findExactArchive.chats.push(data[0]);
-
+              console.log("i received data", tempStoredData);
               setStoredMessages(tempStoredData);
               if (ActiveCArchive) {
                 SendSeenStatus(ActiveCArchive.userid, ActiveCArchive.chatid);
@@ -98,30 +149,17 @@ export const MainProvider = ({ children }) => {
 
       PollMaker();
     }
-  }, [StoredMessages.length, ExecutedPoll, currentUser]);
-
-  let meuser = {
-    id: 21,
-    name: "Yakraj Pariyar",
-    desig: "Fullstack Developer",
-    email: "contact@yakraj.com",
-    address: "Mumbai india",
-    cover: "https://picsum.photos/200.jpg",
-    avatar: "https://picsum.photos/200.jpg",
-    online: true,
-    userid: "Yakr1992llroso14",
-  };
+  }, [ExecutedPoll, currentUser]);
 
   useEffect(() => {
-    // setcurrentUser(meuser);
     if (currentUser) {
-      ChatRequests(meuser.userid, setRequestsVal);
-      PendingRequests(meuser.userid, setPendingRequestsVal);
-      GetChatArchives(meuser.userid).then((requests) => {
+      ChatRequests(currentUser.userid, setRequestsVal);
+      PendingRequests(currentUser.userid, setPendingRequestsVal);
+      GetChatArchives(currentUser.userid).then((requests) => {
         setChatArchives(requests);
       });
     }
-  }, []);
+  }, [currentUser]);
 
   const AciveChat = (data) => {
     setActiveCArchive(data);
@@ -204,7 +242,7 @@ export const MainProvider = ({ children }) => {
     LoginUser(umail, pass)
       .then((Credential) => {
         if (Credential.length) {
-          console.log(Credential);
+          // console.log(Credential);
           setcurrentUser(Credential[0]);
           setgoback(true);
         }
