@@ -146,3 +146,25 @@ export const LoginUser = (umail, pass) => {
     }),
   }).then((response) => response.json());
 };
+
+// these function are also called live runner for live status and online and offline status
+
+export const SendOnlineStatus = (userid) => {
+  return fetch(Server + "send/online-status", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userid: userid,
+    }),
+  }).then((response) => response);
+};
+// here i'll get online status of my chat peoples
+export const GetOnlineStatus = (users) => {
+  return fetch(Server + "get/online-status", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      users: users,
+    }),
+  }).then((response) => response.json());
+};

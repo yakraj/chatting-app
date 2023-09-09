@@ -5,9 +5,6 @@ export const ChatsPer = ({ setActivePer }) => {
   const { currentUser, AciveChat, ChatArchives } = useContext(MainContext);
   const [activeChatType, setActiveChatType] = useState("all");
 
-  // it will find active status and thumbnail and name of user1
-  const [ModChatArchive, setModChatArchive] = useState([]);
-
   const SingleMessage = ({ data }) => {
     return (
       <div onClick={() => AciveChat(data)} className="single-message-archive">
@@ -16,14 +13,14 @@ export const ChatsPer = ({ setActivePer }) => {
           className="division45412"
         >
           <div
-            style={{ background: data.onilne ? "#fdc60a" : "#00bf73" }}
+            style={{ background: data.online ? "#00bf73" : "#fdc60a" }}
             className="division74473"
           ></div>
         </div>
         <div className="division52428">
           <p className="message-archive-title">{data.name}</p>
           <p className="message-archive-lastmsg">
-            {data.lastmsg.substring(0, 30) + "..."}
+            {data.lastmsg && data.lastmsg.substring(0, 30) + "..."}
           </p>
         </div>
       </div>
@@ -84,7 +81,7 @@ export const ChatsPer = ({ setActivePer }) => {
         <div className="message-archive-container">
           {ChatArchives.length ? (
             ChatArchives.map((x, i) => {
-              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+              return <SingleMessage key={i} data={x} />;
             })
           ) : (
             <div>

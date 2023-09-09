@@ -4,7 +4,7 @@ import { MainContext } from "../../services/main.context";
 // import "./style.css";
 
 export const LoginPage = () => {
-  const { UserLogin } = useContext(MainContext);
+  const { UserLogin, currentUser } = useContext(MainContext);
 
   const navigation = useNavigate();
   const [umail, setumail] = useState("");
@@ -17,6 +17,12 @@ export const LoginPage = () => {
       navigation("/chatting");
     }
   }, [goback]);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigation("/chatting");
+    }
+  }, [currentUser]);
 
   return (
     <div className="form-container-box">
