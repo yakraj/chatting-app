@@ -21,7 +21,7 @@ export const fetchUsers = (user, setval) => {
     .catch((err) => console.log(err));
 };
 
-export const ReqConnect = (data) => {
+export const ReqConnect = (data, setdata) => {
   const { reqfrom, reqto, message } = data;
 
   fetch(Server + "chatreq", {
@@ -34,7 +34,11 @@ export const ReqConnect = (data) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => {})
+    .then((data) => {
+      if (data.length) {
+        setdata(data);
+      }
+    })
     .catch((err) => console.log(err));
 };
 
@@ -59,16 +63,36 @@ export const PendingRequests = (user, setval) => {
     .then((response) => response.json())
     .then((requests) => setval(requests));
 };
+// when person wants to cancel this request
+
+export const CancelRequest = (reqid, user, setdata) => {
+  fetch(Server + "cancel/chatreq", {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reqid: reqid, user: user }),
+  })
+    .then((response) => response.json())
+    .then((requests) => setdata(requests));
+};
 
 // this is very special and main component of the app is accept request and crete ChatArchive
-export const AcceptRequest = (reqfrom, reqto, reqid) => {
+export const AcceptRequest = (
+  reqfrom,
+  reqto,
+  reqid,
+  setChatArchives,
+  obtainer,
+) => {
   fetch(Server + "connectio/accept-chat-req", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ reqfrom: reqfrom, reqto: reqto, reqid: reqid }),
   })
     .then((response) => response.json())
-    .then((requests) => console.log(requests));
+    .then((requests) => {
+      setChatArchives(requests);
+      obtainer[2](obtainer[1].filter((x) => x !== obtainer[0]));
+    });
 };
 
 // it will handle all chatarchive data
