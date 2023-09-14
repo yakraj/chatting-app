@@ -64,24 +64,24 @@ export const MainProvider = ({ children }) => {
   useEffect(() => {
     if (currentUser) {
       function CreateSeenRq() {
-        ReqSeenData(currentUser.userid).then((data) => {
-          // console.log(data);
+        ReqSeenData(currentUser.userid)
+          .then((data) => {
+            if (data.length && Array.isArray(data)) {
+              let tempStorage = [...StorageMRef.current];
+              console.log(data);
 
-          if (data.length && Array.isArray(data)) {
-            let tempStorage = [...StorageMRef.current];
-
-            data.forEach((x) => {
-              let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
-              let findchats = findChatA.chats.filter(
-                (msg) => msg.userfrom === data.userid
-              );
-              console.log(findchats);
-            });
-          }
-          setTimeout(() => {
+              data.forEach((x) => {
+                let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
+                let findchats = findChatA.chats.filter(
+                  (msg) => msg.userfrom === data[0].userid
+                );
+                findchats.forEach((rename) => (rename.seen = true));
+                setStoredMessages(tempStorage);
+              });
+            }
             CreateSeenRq();
-          }, 3000);
-        });
+          })
+          .catch((err) => CreateSeenRq());
       }
       CreateSeenRq();
     }

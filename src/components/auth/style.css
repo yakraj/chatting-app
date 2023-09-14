@@ -47,6 +47,7 @@
 .user-avatar-container:hover img {
   opacity: 1;
 }
+
 .user-avatar-container {
   height: 100px;
   width: 100px;
