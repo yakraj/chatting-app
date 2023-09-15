@@ -139,9 +139,9 @@ export const ChatUI = () => {
           <div className="division36662">
             <div className="insideMessagecont">
               {StoredMessages.length &&
-                StoredMessages.find(
+                StoredMessages.filter(
                   (x) => x.chatid === ActiveCArchive.chatid
-                ).chats.map((x, i) => {
+                )[0].chats.map((x, i) => {
                   return <WithImageChat key={i} data={x} />;
                 })}
 
