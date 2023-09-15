@@ -81,7 +81,7 @@ export const AcceptRequest = (
   reqto,
   reqid,
   setChatArchives,
-  obtainer
+  obtainer,
 ) => {
   fetch(Server + "connectio/accept-chat-req", {
     method: "post",
@@ -216,6 +216,8 @@ export const ReqSeenData = (userid) => {
     }),
   }).then((response) => response.json());
 };
+
+// these fields are for update data or image
 
 export const UpdateProfile = () => {};
 export const UpdateCover = () => {};

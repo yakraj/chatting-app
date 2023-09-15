@@ -10,7 +10,7 @@ export const SettingsPer = () => {
   const [PersonName, setPersonName] = useState("");
   const [penActive, setPenActive] = useState(false);
   const [changeImage, setchangeImage] = useState(false);
-  const { currentUser } = useContext(MainContext);
+  const { currentUser, UpdateUserName } = useContext(MainContext);
   useEffect(() => {
     if (currentUser) {
       setPersonName(currentUser.name);
@@ -176,6 +176,7 @@ export const SettingsPer = () => {
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
                       setPenActive(false);
+                      UpdateUserName(PersonName);
                     }
                   }}
                   value={PersonName}

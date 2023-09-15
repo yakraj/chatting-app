@@ -17,6 +17,7 @@ import {
   GetOnlineStatus,
   SendSeenData,
   ReqSeenData,
+  UpdateName,
 } from "./main.service";
 
 // Create the context
@@ -79,7 +80,7 @@ export const MainProvider = ({ children }) => {
               data.forEach((x) => {
                 let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
                 let findchats = findChatA.chats.filter(
-                  (msg) => msg.userfrom === data[0].userid
+                  (msg) => msg.userfrom === data[0].userid,
                 );
                 findchats.forEach((rename) => (rename.seen = true));
                 setStoredMessages(tempStorage);
@@ -106,7 +107,7 @@ export const MainProvider = ({ children }) => {
         if (data.length && Array.isArray(data)) {
           data.forEach((sts) => {
             let findexist = tempArchives.find(
-              (exst) => exst.userid === sts.userid
+              (exst) => exst.userid === sts.userid,
             );
             findexist.online = sts.online;
           });
@@ -144,7 +145,7 @@ export const MainProvider = ({ children }) => {
     if (currentUser) {
       setInterval(() => {
         GetChatArchives(currentUser.userid).then((data) =>
-          setChatArchives(data)
+          setChatArchives(data),
         );
       }, 60000);
     }
@@ -155,7 +156,7 @@ export const MainProvider = ({ children }) => {
       ChatArchives.forEach((x) => {
         if (StorageMRef.current.length) {
           let findThischat = StorageMRef.current.find(
-            (y) => x.chatid === y.chatid
+            (y) => x.chatid === y.chatid,
           );
           if (!findThischat) {
             let tempsingledemo = {
@@ -196,14 +197,14 @@ export const MainProvider = ({ children }) => {
           //here after getting response send seen status of any message
           SendSeenData(
             ActiveArchiveRef.current.userid,
-            ActiveArchiveRef.current.chatid
+            ActiveArchiveRef.current.chatid,
           );
 
           if (data.length) {
             let tempStoredData = [...StorageMRef.current];
 
             let findExactArchive = tempStoredData.find(
-              (x) => x.chatid === data[0].chatid
+              (x) => x.chatid === data[0].chatid,
             );
             findExactArchive.chats.push(data[0]);
             setStoredMessages(tempStoredData);
@@ -294,11 +295,11 @@ export const MainProvider = ({ children }) => {
       if (finder) {
         let tempStoreMsg = [...StoredMessages];
         let chatss = tempStoreMsg.find(
-          (x) => x.chatid === response[0].chatid
+          (x) => x.chatid === response[0].chatid,
         ).chats;
         if (chatss) {
           chatss.find(
-            (y) => y.messageid === response[0].messageid
+            (y) => y.messageid === response[0].messageid,
           ).delivery = true;
         }
         setStoredMessages(tempStoreMsg);
@@ -318,6 +319,12 @@ export const MainProvider = ({ children }) => {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  // here few modification functions will work for update and modify
+
+  const UpdateUserName = (name) => {
+    UpdateName(currentUser.userid, name).then((data) => console.log(data));
   };
 
   return (
@@ -342,6 +349,7 @@ export const MainProvider = ({ children }) => {
         setChatArchives,
         setPendingRequestsVal,
         setRequestsVal,
+        UpdateUserName,
       }}
     >
       {children}
