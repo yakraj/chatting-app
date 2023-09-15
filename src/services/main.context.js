@@ -40,7 +40,7 @@ export const MainProvider = ({ children }) => {
   //these are some updater for useeffect
   const StorageMRef = useRef();
   const ActiveArchiveRef = useRef();
-
+  const ChatArchivesRef = useRef();
   // this useEffect will handle all kind of changes in ChatArchives and update itself
   useEffect(() => {
     StorageMRef.current = StoredMessages;
@@ -49,6 +49,12 @@ export const MainProvider = ({ children }) => {
   useEffect(() => {
     ActiveArchiveRef.current = ActiveCArchive;
   }, [ActiveCArchive]);
+
+  // this will keep everything inside of the chatarchive updated as a ref
+
+  useEffect(() => {
+    ChatArchivesRef.current = ChatArchives;
+  }, [ChatArchives]);
 
   // this useeffect will send my
   useEffect(() => {
@@ -91,12 +97,12 @@ export const MainProvider = ({ children }) => {
   useEffect(() => {
     const AllusersStatus = () => {
       let tempUsers = [];
-      ChatArchives.forEach((x) => {
+      ChatArchivesRef.current.forEach((x) => {
         tempUsers.push(x.userid);
       });
 
       GetOnlineStatus(tempUsers).then((data) => {
-        let tempArchives = [...ChatArchives];
+        let tempArchives = [...ChatArchivesRef.current];
         if (data.length && Array.isArray(data)) {
           data.forEach((sts) => {
             let findexist = tempArchives.find(
@@ -109,12 +115,41 @@ export const MainProvider = ({ children }) => {
       });
     };
 
-    if (ChatArchives.length) {
-      setInterval(() => {
-        AllusersStatus();
-      }, 90000);
-    }
+    const intervalId = setInterval(() => {
+      AllusersStatus();
+    }, 9000);
+
+    AllusersStatus();
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [ChatArchives.length]);
+
+  // here i'll have to update two things first is getchatArchive either use pull
+  // or i can use this kind of setinterval method to call every specific time
+  // I think pending and requests can be updated in very 3 minutes because these are not very requires for all time
+  // But the very important thing for me is keep updated the chatarchives
+  // so first i'll call the pending and chatrequests
+  useEffect(() => {
+    if (currentUser) {
+      setInterval(() => {
+        ChatRequests(currentUser.userid, setRequestsVal);
+        PendingRequests(currentUser.userid, setPendingRequestsVal);
+      }, 180000);
+    }
+  }, [currentUser]);
+  // secondly here i'll have to get and update everytime if any length gets changed in chatarchives
+  useEffect(() => {
+    if (currentUser) {
+      setInterval(() => {
+        GetChatArchives(currentUser.userid).then((data) =>
+          setChatArchives(data)
+        );
+      }, 60000);
+    }
+  }, [currentUser]);
+
   useEffect(() => {
     if (ChatArchives.length) {
       ChatArchives.forEach((x) => {
@@ -154,32 +189,29 @@ export const MainProvider = ({ children }) => {
   useEffect(() => {
     if (currentUser && !ExecutedPoll) {
       const PollMaker = () => {
+        console.count("executed poll");
         setExecutedPoll(true);
-        PoolChat(currentUser.userid)
-          .then((data) => {
-            PollMaker();
-            //here after getting response send seen status of any message
-            SendSeenData(
-              ActiveArchiveRef.current.userid,
-              ActiveArchiveRef.current.chatid
+        PoolChat(currentUser.userid).then((data) => {
+          PollMaker();
+          //here after getting response send seen status of any message
+          SendSeenData(
+            ActiveArchiveRef.current.userid,
+            ActiveArchiveRef.current.chatid
+          );
+
+          if (data.length) {
+            let tempStoredData = [...StorageMRef.current];
+
+            let findExactArchive = tempStoredData.find(
+              (x) => x.chatid === data[0].chatid
             );
-
-            if (data.length) {
-              let tempStoredData = [...StorageMRef.current];
-
-              let findExactArchive = tempStoredData.find(
-                (x) => x.chatid === data[0].chatid
-              );
-              findExactArchive.chats.push(data[0]);
-              setStoredMessages(tempStoredData);
-              if (ActiveCArchive) {
-                SendSeenStatus(ActiveCArchive.userid, ActiveCArchive.chatid);
-              }
+            findExactArchive.chats.push(data[0]);
+            setStoredMessages(tempStoredData);
+            if (ActiveCArchive) {
+              SendSeenStatus(ActiveCArchive.userid, ActiveCArchive.chatid);
             }
-          })
-          .catch((err) => {
-            PollMaker();
-          });
+          }
+        });
 
         // inside of the same pollmake i would like to make another request too of get seen chat requests
       };
@@ -307,6 +339,9 @@ export const MainProvider = ({ children }) => {
         ChatArchives,
         StoredMessages,
         UserLogin,
+        setChatArchives,
+        setPendingRequestsVal,
+        setRequestsVal,
       }}
     >
       {children}

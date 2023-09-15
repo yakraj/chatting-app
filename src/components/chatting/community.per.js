@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { MainContext } from "../../services/main.context";
 import {
   AcceptRequest,
+  CancelRequest,
   ReqConnect,
   SingleUser,
 } from "../../services/main.service";
@@ -19,6 +20,9 @@ export const CommunityPer = () => {
     currentUser,
     RequestsVal,
     PendingRequestsVal,
+    setPendingRequestsVal,
+    setChatArchives,
+    setRequestsVal,
   } = useContext(MainContext);
 
   const handleChange = (e) => {
@@ -34,7 +38,7 @@ export const CommunityPer = () => {
             window.alert("user details must be more than 3 characters");
           }
         }
-      }, 500)
+      }, 500),
     );
   };
 
@@ -73,6 +77,9 @@ export const CommunityPer = () => {
         </div>
         <div className="division51510">
           <button
+            onClick={() =>
+              CancelRequest(data.reqid, data.reqfrom, setPendingRequestsVal)
+            }
             className="button20350"
             style={{
               borderRadius: "25px",
@@ -96,14 +103,19 @@ export const CommunityPer = () => {
 
     const SendReq = () => {
       // console.log("you can create req now");
-      ReqConnect({
-        reqfrom: currentUser.userid,
-        reqto: data.userid,
-        message: ReqMessage,
-      });
+      ReqConnect(
+        {
+          reqfrom: currentUser.userid,
+          reqto: data.userid,
+          message: ReqMessage,
+        },
+        setPendingRequestsVal,
+      );
     };
 
-    return (
+    return PendingRequestsVal.some((x) => x.reqto === data.userid) ||
+      RequestsVal.some((x) => x.reqfrom === data.userid) ||
+      currentUser.userid === data.userid ? null : (
       <div
         className="division44297"
         style={{ height: "auto", paddingBottom: "15px", margin: "5px" }}
@@ -185,7 +197,13 @@ export const CommunityPer = () => {
         <div className="division51510">
           <button
             onClick={() => {
-              AcceptRequest(data.reqfrom, data.reqto, data.reqid);
+              AcceptRequest(
+                data.reqfrom,
+                data.reqto,
+                data.reqid,
+                setChatArchives,
+                [data, RequestsVal, setRequestsVal],
+              );
             }}
             className="button20350"
             style={{

@@ -327,7 +327,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 10px;
   align-items: center;
+  /* border: 1px solid grey; */
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px grey;
 }
 .image67949 {
   width: 35px;
@@ -471,7 +475,9 @@
 }
 .division74473 {
   height: 16.875px;
-  box-shadow: 0 0 5px grey, 0 0 7px #000;
+  box-shadow:
+    0 0 5px grey,
+    0 0 7px #000;
   width: 16.875px;
   box-sizing: border-box;
   border-radius: 50%;
