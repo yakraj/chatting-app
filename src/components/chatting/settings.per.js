@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
+import imageCompression from "browser-image-compression";
 
 export const SettingsPer = () => {
   // switches state
@@ -10,7 +11,8 @@ export const SettingsPer = () => {
   const [PersonName, setPersonName] = useState("");
   const [penActive, setPenActive] = useState(false);
   const [changeImage, setchangeImage] = useState(false);
-  const { currentUser, UpdateUserName } = useContext(MainContext);
+  const { currentUser, UpdateUserName, UpdateavatarImage } =
+    useContext(MainContext);
   useEffect(() => {
     if (currentUser) {
       setPersonName(currentUser.name);
@@ -19,9 +21,26 @@ export const SettingsPer = () => {
 
   const ChangeImagePop = () => {
     const [ImageURL, setImageURL] = useState();
+    async function handleImageUpload(files) {
+      const imageFile = files[0];
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 460,
+        useWebWorker: true,
+      };
+      try {
+        const compressedFile = await imageCompression(imageFile, options);
+        console.log(compressedFile);
+        UpdateavatarImage(compressedFile);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     const handleFileInputChange = (event) => {
       const [file] = event.target.files;
+      const { files } = event.target;
+      handleImageUpload(files);
       let localURL;
       if (file) {
         localURL = URL.createObjectURL(file);

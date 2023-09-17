@@ -81,7 +81,7 @@ export const AcceptRequest = (
   reqto,
   reqid,
   setChatArchives,
-  obtainer,
+  obtainer
 ) => {
   fetch(Server + "connectio/accept-chat-req", {
     method: "post",
@@ -219,7 +219,23 @@ export const ReqSeenData = (userid) => {
 
 // these fields are for update data or image
 
-export const UpdateProfile = () => {};
+export const UpdateProfile = (avatar, user) => {
+  console.log(avatar, user);
+  const data = new FormData();
+  data.append("username", user);
+  avatar && data.append("fileData", avatar);
+  const config = {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+    body: data,
+  };
+  return fetch(Server + "update/user/avatar", config).then((response) =>
+    response.json()
+  );
+};
 export const UpdateCover = () => {};
 export const UpdateName = (user, name) => {
   return fetch(Server + "update/user/name", {
@@ -229,5 +245,5 @@ export const UpdateName = (user, name) => {
       user: user,
       name: name,
     }),
-  });
+  }).then((response) => response.json());
 };
