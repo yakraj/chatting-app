@@ -5,7 +5,7 @@ import { MainContext } from "../../services/main.context";
 import { ChattingUInav } from "./chatting.ui.nav";
 export const ChatUI = () => {
   const [ChatText, setChatText] = useState("");
-
+  const [infoOn,setinfoOn] =useState(false)
   const {
     activeChats,
     currentUser,
@@ -135,7 +135,7 @@ export const ChatUI = () => {
     ActiveCArchive && (
       <>
         <div className="division54868">
-          <ChattingUInav />
+          <ChattingUInav infoOn ={infoOn} setinfoOn ={setinfoOn} />
           <div className="division36662">
             <div className="insideMessagecont">
               {StoredMessages.length &&
@@ -182,11 +182,12 @@ export const ChatUI = () => {
             </div>
           </div>
         </div>
-        {/* <InfoUser
+        <InfoUser
+        
           infoOn={infoOn}
           information={activeChatUser}
           setinfoOn={setinfoOn}
-        /> */}
+        />
       </>
     )
   );

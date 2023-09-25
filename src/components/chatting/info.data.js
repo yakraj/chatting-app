@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/chatting/info.data.css";
+import { MainContext } from "../../services/main.context";
 
-export const InfoUser = ({ infoOn, information, setinfoOn }) => {
+export const InfoUser = ({ infoOn, setinfoOn }) => {
+  const { ActiveCArchive } = useContext(MainContext);
+
   return (
     <div style={{ width: infoOn ? "45%" : "0px" }} className="blurry-container">
       <div className="chat-nav absolute-nav">
@@ -17,14 +20,14 @@ export const InfoUser = ({ infoOn, information, setinfoOn }) => {
       <div className="division81937">
         <div
           className="profile-avatar"
-          style={{ backgroundImage: `url(${information.avatar})` }}
+          style={{ backgroundImage: `url(${ActiveCArchive.avatar})` }}
         ></div>
         <h1 className="text50755" style={{ margin: "0px" }}>
-          {information.name}
+          {ActiveCArchive.name}
         </h1>
 
         <h2 style={{ fontSize: "1rem" }} className="text80595">
-          {information.desc}
+          {ActiveCArchive.desc}
         </h2>
         <div className="address-container-info" style={{ width: "159px" }}>
           <img
@@ -32,7 +35,7 @@ export const InfoUser = ({ infoOn, information, setinfoOn }) => {
             className="image89335"
             alt="custom"
           />
-          <p className="paragraph87029">{information.address}</p>
+          <p className="paragraph87029">{ActiveCArchive.address}</p>
         </div>
         <div className="address-container-info" style={{ width: "auto" }}>
           <img

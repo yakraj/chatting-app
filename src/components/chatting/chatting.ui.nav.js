@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { MainContext } from "../../services/main.context";
 
-export const ChattingUInav = () => {
+export const ChattingUInav = ({infoOn, setinfoOn}) => {
   const { ActiveCArchive } = useContext(MainContext);
 
   const [searchOpend, onSearchOpend] = useState(false);
   const [popTdot, onpopTdot] = useState(false);
-  const [infoOn, setinfoOn] = useState(false);
   const [deletedot, ondeletedot] = useState(false);
   return (
     <div className="division33537 chat-nav">

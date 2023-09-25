@@ -7,6 +7,7 @@ import {
   SingleUser,
 } from "../../services/main.service";
 import { Loader } from "../loader";
+import { Empty } from "../nothing";
 
 export const CommunityPer = () => {
   const [showPending, setShowPending] = useState(false);
@@ -22,7 +23,7 @@ export const CommunityPer = () => {
     PendingRequestsVal,
     setPendingRequestsVal,
     setChatArchives,
-    setRequestsVal,
+    setRequestsVal,loadingSearch
   } = useContext(MainContext);
 
   const handleChange = (e) => {
@@ -304,10 +305,12 @@ export const CommunityPer = () => {
 
       {activeCommunityType === "results" && (
         <div className="search-result-container">
-          {SearchUsersVal.length &&
+          {SearchUsersVal.length ?
             SearchUsersVal.map((x, i) => {
               return <SearchResultCard key={i} data={x} />;
-            })}
+            }) : loadingSearch ? <Loader width = "5em" /> :(
+              <Empty width="20em" />
+            )}
         </div>
       )}
 
@@ -319,7 +322,7 @@ export const CommunityPer = () => {
               return <PendingCard data={x} key={i} />;
             })
           ) : (
-            <Loader width="50px" />
+            <Empty width="20em" />
           )}
         </div>
       )}
@@ -327,10 +330,12 @@ export const CommunityPer = () => {
       {/* it is going to be the incoming requests card container */}
       {activeCommunityType === "requests" && (
         <div className="requests-container">
-          {RequestsVal.length &&
+          {RequestsVal.length ?
             RequestsVal.map((x, i) => {
               return <IncomingRequestCard data={x} key={i} />;
-            })}
+            }): (
+              <Empty width="20em" />
+            )}
         </div>
       )}
     </>

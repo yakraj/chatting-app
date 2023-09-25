@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
+import { Empty } from "../nothing";
 
 export const ChatsPer = ({ setActivePer }) => {
   const { currentUser, AciveChat, ChatArchives } = useContext(MainContext);
@@ -84,9 +85,7 @@ export const ChatsPer = ({ setActivePer }) => {
               return <SingleMessage key={i} data={x} />;
             })
           ) : (
-            <div>
-              <h1>No messages found</h1>
-            </div>
+            <Empty width="2em"/>
           )}
         </div>
       )}
@@ -95,12 +94,10 @@ export const ChatsPer = ({ setActivePer }) => {
         <div className="message-archive-container">
           {ChatArchives.find((x) => x.online === true) ? (
             ChatArchives.filter((x) => x.online === true).map((x, i) => {
-              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+              return <SingleMessage key={i} data={x} />;
             })
           ) : (
-            <div>
-              <h1>No messages found</h1>
-            </div>
+            <Empty width="15em"/>
           )}
         </div>
       )}
@@ -110,8 +107,15 @@ export const ChatsPer = ({ setActivePer }) => {
           {ChatArchives.filter((x) => x.favourite !== null)
             .filter((x) => x.favourite.includes(currentUser.userid))
             .map((x, i) => {
-              return <SingleMessage key={i} data={x} name="jenifer lopez" />;
+              return <SingleMessage key={i} data={x}  />;
             })}
+
+            {
+              !ChatArchives.filter((x) => x.favourite !== null)
+              .filter((x) => x.favourite.includes(currentUser.userid)).length &&
+
+              <Empty width="15em"/>
+            }
         </div>
       )}
     </>

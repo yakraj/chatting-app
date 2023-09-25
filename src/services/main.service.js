@@ -10,14 +10,14 @@ export const SingleUser = (user) => {
   }).then((response) => response.json());
 };
 
-export const fetchUsers = (user, setval) => {
+export const fetchUsers = (user, setval,setloadingSearch) => {
   fetch(Server + "searchuser", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user: user }),
   })
     .then((response) => response.json())
-    .then((data) => setval(data))
+    .then((data) => {setval(data);setloadingSearch(false)})
     .catch((err) => console.log(err));
 };
 

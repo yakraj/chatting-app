@@ -33,6 +33,7 @@ export const MainProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState();
   const [ActiveCArchive, setActiveCArchive] = useState();
   const [ExecutedPoll, setExecutedPoll] = useState(false);
+  const [loadingSearch,setloadingSearch] = useState(false)
   // these are data containers
   const [SearchUsersVal, setSearchUsersVal] = useState([]);
   const [RequestsVal, setRequestsVal] = useState([]);
@@ -76,7 +77,7 @@ export const MainProvider = ({ children }) => {
         ReqSeenData(currentUser.userid).then((data) => {
           if (data.length && Array.isArray(data)) {
             let tempStorage = [...StorageMRef.current];
-            console.log(data);
+      
 
             data.forEach((x) => {
               let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
@@ -261,7 +262,8 @@ export const MainProvider = ({ children }) => {
 
   const Searchusers = (user) => {
     setSearchUsersVal([]);
-    fetchUsers(user, setSearchUsersVal);
+    setloadingSearch(true)
+    fetchUsers(user, setSearchUsersVal,setloadingSearch);
   };
 
   const SingleChatCreate = (data) => {
@@ -316,7 +318,6 @@ export const MainProvider = ({ children }) => {
     LoginUser(umail, pass)
       .then((Credential) => {
         if (Credential.length) {
-          // console.log(Credential);
           setcurrentUser(Credential[0]);
           setgoback(true);
         }
@@ -349,7 +350,6 @@ export const MainProvider = ({ children }) => {
       activeImageUpdater,
       currentUser.name,
     ).then((data) => {
-      console.log(data);
       if (data.length && Array.isArray(data)) {
         setcurrentUser(data[0]);
         setchangeImage(false);
@@ -416,7 +416,7 @@ export const MainProvider = ({ children }) => {
         setPendingRequestsVal,
         setRequestsVal,
         UpdateUserName,
-        UpdateavatarImage,
+        UpdateavatarImage,loadingSearch
       }}
     >
       {children}
