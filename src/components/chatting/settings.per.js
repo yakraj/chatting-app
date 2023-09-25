@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../services/main.context";
-import imageCompression from "browser-image-compression";
 
 export const SettingsPer = () => {
   // switches state
@@ -10,9 +9,18 @@ export const SettingsPer = () => {
   const [NotificationSw, setNotificationSw] = useState(true);
   const [PersonName, setPersonName] = useState("");
   const [penActive, setPenActive] = useState(false);
-  const [changeImage, setchangeImage] = useState(false);
-  const { currentUser, UpdateUserName, UpdateavatarImage } =
-    useContext(MainContext);
+ 
+  const {
+    currentUser,
+    UpdateavatarImage,
+    UpdateUserName,
+    compressedfile,
+    ImageURL,
+    setImageURL,
+    handleImageUpload,
+    activeImageUpdater,
+    setactiveImageUpdater,changeImage, setchangeImage
+  } = useContext(MainContext);
   useEffect(() => {
     if (currentUser) {
       setPersonName(currentUser.name);
@@ -20,36 +28,21 @@ export const SettingsPer = () => {
   }, []);
 
   const ChangeImagePop = () => {
-    const [ImageURL, setImageURL] = useState();
-    async function handleImageUpload(files) {
-      const imageFile = files[0];
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 460,
-        useWebWorker: true,
-      };
-      try {
-        const compressedFile = await imageCompression(imageFile, options);
-        console.log(compressedFile);
-        UpdateavatarImage(compressedFile);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
     const handleFileInputChange = (event) => {
       const [file] = event.target.files;
       const { files } = event.target;
       handleImageUpload(files);
-      let localURL;
-      if (file) {
-        localURL = URL.createObjectURL(file);
-      }
-      setImageURL(localURL);
+
+      setImageURL(URL.createObjectURL(file));
     };
     return (
       <div className="allcover-popup">
-        <div className="upload-poup">
+        <div
+          style={{
+            height: activeImageUpdater === "profile" ? "250px" : "350px",
+          }}
+          className="upload-poup"
+        >
           <div className="division32536">
             <div onClick={() => setchangeImage(false)} className="close-button">
               <img
@@ -61,22 +54,27 @@ export const SettingsPer = () => {
           </div>
           <p className="preview-text">preview</p>
           <div
-            style={{ backgroundImage: `url(${ImageURL})` }}
+            style={{
+              height: activeImageUpdater === "profile" ? "100px" : "350px",
+              width: activeImageUpdater === "profile" ? "100px" : "90%",
+              borderRadius: activeImageUpdater === "profile" ? "50%" : "15px",
+              backgroundImage: `url(${ImageURL})`,
+            }}
             className="preview-avatar"
-          ></div>
-          <div className="division43188 ">
+          >
+            <img src={require("../../assects/camera.png")} alt="camera" />
             <input
               onChange={handleFileInputChange}
               className="fileinput94501"
               type="file"
             />
-            <p className="upload-image-text pointer">Upload image</p>
           </div>
-          <input
-            type="text"
-            className="url-input-avatar"
-            placeholder="Place Your url here"
-          />
+          <button
+            onClick={() => UpdateavatarImage(compressedfile)}
+            class="photo-upload"
+          >
+            Done
+          </button>
         </div>
       </div>
     );
@@ -85,9 +83,15 @@ export const SettingsPer = () => {
   return (
     <>
       {changeImage && <ChangeImagePop />}
-      <div className="cover-image">
+      <div
+        style={{ backgroundImage: `url(${currentUser && currentUser.cover})` }}
+        className="cover-image"
+      >
         <div
-          onClick={() => setchangeImage(true)}
+          onClick={() => {
+            setactiveImageUpdater("cover");
+            setchangeImage(true);
+          }}
           className="edit-button pointer"
           style={{
             borderRadius: "20px",
@@ -101,9 +105,15 @@ export const SettingsPer = () => {
           />
         </div>
       </div>
-      <div className="avatar">
+      <div
+        style={{ backgroundImage: `url(${currentUser && currentUser.avatar})` }}
+        className="avatar"
+      >
         <div
-          onClick={() => setchangeImage(true)}
+          onClick={() => {
+            setactiveImageUpdater("profile");
+            setchangeImage(true);
+          }}
           style={{
             borderRadius: "50%",
             background: "grey",

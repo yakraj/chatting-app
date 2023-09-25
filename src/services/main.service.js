@@ -81,7 +81,7 @@ export const AcceptRequest = (
   reqto,
   reqid,
   setChatArchives,
-  obtainer
+  obtainer,
 ) => {
   fetch(Server + "connectio/accept-chat-req", {
     method: "post",
@@ -219,22 +219,40 @@ export const ReqSeenData = (userid) => {
 
 // these fields are for update data or image
 
-export const UpdateProfile = (avatar, user) => {
-  console.log(avatar, user);
+export const UpdateProfile = (avatar, user, type, name) => {
   const data = new FormData();
   data.append("username", user);
+  data.append("name", name);
+  data.append("type", type);
   avatar && data.append("fileData", avatar);
   const config = {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data",
     },
     body: data,
   };
   return fetch(Server + "update/user/avatar", config).then((response) =>
-    response.json()
+    response.json(),
   );
+};
+export const SignUP = (data) => {
+  const form = new FormData();
+  form.append("name", data.name);
+  form.append("desc", data.desig);
+  form.append("email", data.email);
+  form.append("address", data.address);
+  form.append("gateway", data.pass);
+  form.append("fileData", data.avatar);
+  const config = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+    body: form,
+  };
+  return fetch(Server + "adduser", config).then((response) => response.json());
 };
 export const UpdateCover = () => {};
 export const UpdateName = (user, name) => {
