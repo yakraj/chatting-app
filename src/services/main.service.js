@@ -225,7 +225,7 @@ export const UpdateProfile = (avatar, user) => {
   data.append("username", user);
   avatar && data.append("fileData", avatar);
   const config = {
-    method: "PUT",
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
