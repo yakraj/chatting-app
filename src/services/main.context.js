@@ -1,7 +1,7 @@
 // ChatContext.js
 
 import React, { createContext, useState, useEffect, useRef } from "react";
-
+import imageCompression from "browser-image-compression";
 import { MockUsers, FavouriteArchives, chattings } from "./mock.data";
 import {
   ChatRequests,
@@ -19,6 +19,7 @@ import {
   ReqSeenData,
   UpdateName,
   UpdateProfile,
+  SignUP,
 } from "./main.service";
 
 // Create the context
@@ -72,24 +73,22 @@ export const MainProvider = ({ children }) => {
   useEffect(() => {
     if (currentUser) {
       function CreateSeenRq() {
-        ReqSeenData(currentUser.userid)
-          .then((data) => {
-            if (data.length && Array.isArray(data)) {
-              let tempStorage = [...StorageMRef.current];
-              console.log(data);
+        ReqSeenData(currentUser.userid).then((data) => {
+          if (data.length && Array.isArray(data)) {
+            let tempStorage = [...StorageMRef.current];
+            console.log(data);
 
-              data.forEach((x) => {
-                let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
-                let findchats = findChatA.chats.filter(
-                  (msg) => msg.userfrom === data[0].userid
-                );
-                findchats.forEach((rename) => (rename.seen = true));
-                setStoredMessages(tempStorage);
-              });
-            }
-            CreateSeenRq();
-          })
-          .catch((err) => CreateSeenRq());
+            data.forEach((x) => {
+              let findChatA = tempStorage.find((y) => y.chatid === x.chatid);
+              let findchats = findChatA.chats.filter(
+                (msg) => msg.userfrom === data[0].userid,
+              );
+              findchats.forEach((rename) => (rename.seen = true));
+              setStoredMessages(tempStorage);
+            });
+          }
+          CreateSeenRq();
+        });
       }
       CreateSeenRq();
     }
@@ -108,7 +107,7 @@ export const MainProvider = ({ children }) => {
         if (data.length && Array.isArray(data)) {
           data.forEach((sts) => {
             let findexist = tempArchives.find(
-              (exst) => exst.userid === sts.userid
+              (exst) => exst.userid === sts.userid,
             );
             findexist.online = sts.online;
           });
@@ -121,7 +120,7 @@ export const MainProvider = ({ children }) => {
       if (ChatArchives.length) {
         AllusersStatus();
       }
-    }, 9000);
+    }, 180000);
 
     if (ChatArchives.length) {
       AllusersStatus();
@@ -150,7 +149,7 @@ export const MainProvider = ({ children }) => {
     if (currentUser) {
       setInterval(() => {
         GetChatArchives(currentUser.userid).then((data) =>
-          setChatArchives(data)
+          setChatArchives(data),
         );
       }, 60000);
     }
@@ -161,7 +160,7 @@ export const MainProvider = ({ children }) => {
       ChatArchives.forEach((x) => {
         if (StorageMRef.current.length) {
           let findThischat = StorageMRef.current.find(
-            (y) => x.chatid === y.chatid
+            (y) => x.chatid === y.chatid,
           );
           if (!findThischat) {
             let tempsingledemo = {
@@ -208,7 +207,7 @@ export const MainProvider = ({ children }) => {
             let tempStoredData = [...StorageMRef.current];
 
             let findExactArchive = tempStoredData.find(
-              (x) => x.chatid === data[0].chatid
+              (x) => x.chatid === data[0].chatid,
             );
             findExactArchive.chats.push(data[0]);
             setStoredMessages(tempStoredData);
@@ -299,11 +298,11 @@ export const MainProvider = ({ children }) => {
       if (finder) {
         let tempStoreMsg = [...StoredMessages];
         let chatss = tempStoreMsg.find(
-          (x) => x.chatid === response[0].chatid
+          (x) => x.chatid === response[0].chatid,
         ).chats;
         if (chatss) {
           chatss.find(
-            (y) => y.messageid === response[0].messageid
+            (y) => y.messageid === response[0].messageid,
           ).delivery = true;
         }
         setStoredMessages(tempStoreMsg);
@@ -338,15 +337,66 @@ export const MainProvider = ({ children }) => {
 
   // on this second property it makes changes in avatar
 
+  // it will handle few image update
+  const [activeImageUpdater, setactiveImageUpdater] = useState();
+  const [ImageURL, setImageURL] = useState();
+  const [compressedfile, setCompressedfile] = useState();
+  const [changeImage, setchangeImage] = useState(false);
   const UpdateavatarImage = (image) => {
-    console.log("reached until here");
-    UpdateProfile(image, currentUser.userid);
+    UpdateProfile(
+      image,
+      currentUser.userid,
+      activeImageUpdater,
+      currentUser.name,
+    ).then((data) => {
+      console.log(data);
+      if (data.length && Array.isArray(data)) {
+        setcurrentUser(data[0]);
+        setchangeImage(false);
+        setImageURL("");
+      }
+    });
   };
+  async function handleImageUpload(files) {
+    const imageFile = files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 460,
+      useWebWorker: true,
+    };
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
 
+      setCompressedfile(compressedFile);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // this is for register user1
+
+  const RegisterUser = (regdata, navigate) => {
+    regdata.avatar = compressedfile;
+    SignUP(regdata).then((data) => {
+      if (data.length && Array.isArray(data)) {
+        setcurrentUser(data[0]);
+        navigate("/chatting");
+      }
+    });
+  };
   return (
     <MainContext.Provider
       value={{
         chat,
+        RegisterUser,
+        ImageURL,
+        setImageURL,
+        compressedfile,
+        activeImageUpdater,
+        setactiveImageUpdater,
+        changeImage,
+        setchangeImage,
+        handleImageUpload,
         addChatMessage,
         MockUsers,
         activeChats,

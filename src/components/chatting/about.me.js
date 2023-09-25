@@ -6,7 +6,10 @@ export const AboutMe = ({ setActivePer }) => {
 
   return (
     <>
-      <div className="division67935">
+      <div
+        style={{ backgroundImage: `url(${currentUser && currentUser.cover})` }}
+        className="division67935"
+      >
         <div className="division88230">
           <h1
             className="title-about-person"
@@ -40,7 +43,10 @@ export const AboutMe = ({ setActivePer }) => {
           </div>
         </div>
       </div>
-      <div className="division63858"></div>
+      <div
+        style={{ backgroundImage: `url(${currentUser && currentUser.avatar})` }}
+        className="division63858"
+      ></div>
       <div className="division81716">
         <h1
           className="title-about-person"

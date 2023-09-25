@@ -314,10 +314,13 @@ export const CommunityPer = () => {
       {/* it is going to be the pending cards container */}
       {activeCommunityType === "pending" && (
         <div className="search-result-container">
-          {PendingRequestsVal.length &&
+          {PendingRequestsVal.length ? (
             PendingRequestsVal.map((x, i) => {
               return <PendingCard data={x} key={i} />;
-            })}
+            })
+          ) : (
+            <Loader width="50px" />
+          )}
         </div>
       )}
 

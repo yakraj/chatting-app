@@ -7,6 +7,21 @@
   align-items: center;
 }
 
+.photo-upload {
+  padding: 5px 10px;
+  margin: 10px;
+  width: 50%;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: #455991;
+  box-shadow: 3px 3px 5px grey;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+}
 .image64135 {
   width: 15px;
 }
@@ -125,6 +140,8 @@
 .cover-image {
   height: 15%;
   width: 100%;
+  background-size: cover;
+  background-position: center;
   box-sizing: border-box;
   justify-content: flex-end;
   display: flex;
@@ -762,16 +779,28 @@
   margin: 5px 0px 0px;
   color: #000;
 }
+.preview-avatar img {
+  visibility: hidden;
+  transition-duration: 0.3s;
+  position: absolute;
+}
+
+.preview-avatar:hover img {
+  filter: invert(0.8);
+  visibility: visible;
+}
 .preview-avatar {
-  height: 100px;
-  width: 100px;
+  position: relative;
+
   box-sizing: border-box;
-  border-radius: 50%;
   margin-top: 5px;
   color: rgb(201, 202, 209);
   border: 1px solid grey;
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .division43188 {
   height: 25px;
